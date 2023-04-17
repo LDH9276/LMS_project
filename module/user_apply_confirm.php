@@ -17,6 +17,11 @@ $sql = "SELECT * FROM learn_apply";
 $result = mysqli_query($conn, $sql);
 $row = mysqli_fetch_array($result);
 
+$usersql = "SELECT * FROM user_table WHERE user_num = '$user_num'";
+$user_result = mysqli_query($conn, $usersql);
+$user_row = mysqli_fetch_array($user_result);
+$user_id = $user_row['user_id'];
+
 // 정원 체크
 $limit_sql = "SELECT * FROM learn_table WHERE learn_num = '$learn_ID'";
 $limit_result = mysqli_query($conn, $limit_sql);
@@ -37,8 +42,8 @@ if($now_person >= $limit){
 
 // 승인
   if ($verify == 'ok'){
-    $stmt = mysqli_prepare($conn, "insert into learn_apply set user_name = ?, learn_title = ?, apply_date = ?");
-    mysqli_stmt_bind_param($stmt, "sss", $user_name, $learn_name, $date);
+    $stmt = mysqli_prepare($conn, "insert into learn_apply set user_id = ?, user_name = ?, learn_title = ?, apply_date = ?");
+    mysqli_stmt_bind_param($stmt, "ssss", $user_id, $user_name, $learn_name, $date);
     $stmt->execute();
     
     // 승인결과 출력

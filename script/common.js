@@ -13,4 +13,11 @@ $(function () {
     $("#gnb li").find(".lnb").stop().slideUp();
     $(this).find(".lnb").stop().slideToggle();
   });
+
+  $('#h_wrap-mobile').click(function(){
+    $('#h_side').toggleClass('act');
+    $(this).toggleClass('act');
+  }
+  );
+
 });

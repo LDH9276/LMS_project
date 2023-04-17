@@ -24,8 +24,6 @@ if($id == 'mod') {
         <input type="hidden" name="num" value="<?=$num?>">
         <input type="hidden" name="id" value="<?=$id?>">
       <div>
-        <p><input type="submit" value="등록"></p>
-        <p><button type="button" id="n_btn" onclick="document.location.href='notice_list.php'">목록</button></p>
 
         <p class="write-title">
           <label for="notice_title">
@@ -52,6 +50,10 @@ if($id == 'mod') {
           <label for="notice_file" class="btn-file">
             첨부파일
           </label>        
+        </p>
+        <p class="submit_btn-wrap">
+          <input type="submit" value="등록">
+          <button type="button" id="n_btn" onclick="document.location.href='notice_list.php'">목록</button>
         </p>
       </div>
     </form>

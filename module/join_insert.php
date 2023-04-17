@@ -16,6 +16,15 @@ $email = mysqli_real_escape_string($conn, $email);
 $phone = $_POST['user-phone'];
 $phone = mysqli_real_escape_string($conn, $email);
 
+$name_base = $name;
+$i = 1;
+while(mysqli_num_rows($result) > 0) {
+    $sql = "SELECT * FROM user_table WHERE user_name = '$name'";
+    $result = mysqli_query($conn, $sql);
+    $i++;
+    $name = $name_base . $i;
+}
+
 $pw = password_hash($pw, PASSWORD_DEFAULT);
 $stmt = mysqli_prepare($conn, "INSERT INTO user_table (user_id, user_name, user_password, user_info, user_email, user_phone) VALUES (?, ?, ?, ?, ?, ?)");
 if (!$stmt) {

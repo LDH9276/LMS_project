@@ -40,12 +40,8 @@ include_once './right/user_btn.php'; //우측메뉴
       <!-- 메인 -->
       <main>
 <!-- 할일
-      1. 체크박스 스크립트 기능 넣기
-        1-1)전체동의시 전체 체크(완료)
-        1-2) 하나 해제시 전체동의 해제(완료)
-        1-3)일일히 동의 체크 했을시 전체동의에 체크되게 하기
-      3. 폼 디자인하기
-      3-1) 여백 css
+    1. 글자 최소값 넣기(아이디, 학번, 이메일, 연락처)
+    2. 아이디 숫자, 영문 필수 넣기?
 -->
 <link rel='stylesheet' href='./css/join.css' type='text/css'>
 <script>
@@ -69,7 +65,7 @@ include_once './right/user_btn.php'; //우측메뉴
         });
         //비밀번호 확인
         $('#user_password').blur(function(){
-          let reg =  /^(?=.*[a-zA-Z])(?=.*[!@#$%^*+=-])(?=.*[0-9]).{8,15}$/;
+          let reg =  /^(?=.*[a-zA-Z])(?=.*[!@#$%^*+=-])(?=.*[0-9]).{8,16}$/;
           let txt = $('#user_password').val();
           if($(this).val()==''){
             // console.log('비밀번호체크1');
@@ -1211,14 +1207,14 @@ include_once './right/user_btn.php'; //우측메뉴
   <div class="j-form">
   <div class="j-form-f">
     <label class="j-form-label" for="user_id">아이디 <span class="j-form-span">*</span></label>
-    <input type="text" class="j-form-input" id="user_id" maxlength="16" minlength="4" name="user_id" oninput="this.value = this.value.replace(/[^a-zA-Z0-9]/gi, '');" placeholder="영문, 숫자만 입력가능합니다." required>
+    <input type="text" class="j-form-input" id="user_id" maxlength="16" name="user_id" oninput="this.value = this.value.replace(/[^a-zA-Z0-9]/gi, '');" placeholder="영문, 숫자만 입력가능합니다." required>
   </div>
   <div>
     <span id="id_check_msg" data-check="0">&nbsp;</span>
   </div>
   <div class="j-form-f">
     <label class="j-form-label" for="user_password">비밀번호 <span class="j-form-span">*</span></label>
-    <input type="password" class="j-form-input" id="user_password" maxlength="16" minlength="8" name="user_password" placeholder="대문자, 소문자, 숫자, 특수문자를 포함하여야 합니다(8자리 이상)." required>
+    <input type="password" class="j-form-input" id="user_password" maxlength="16"  name="user_password" placeholder="대문자, 소문자, 숫자, 특수문자를 포함하여야 합니다(8자리 이상)." required>
   </div>
   <div>
     <span id="pass_check_msg" data-check="0">&nbsp;</span>
@@ -1242,12 +1238,12 @@ include_once './right/user_btn.php'; //우측메뉴
 </div>
   <div class="j-form-f">
     <label class="j-form-label" for="user_email">이메일 <span class="j-form-span">*</span></label>
-    <input type="email" class="j-form-input" id="user_email" name="user_email" maxlength="30" placeholder="ex) abcd@domain.com"required >
+    <input type="email" class="j-form-input" id="user_email" name="user_email"  maxlength="16" placeholder="ex) abcd@domain.com"required >
   </div>
   &nbsp;
   <div class="j-form-f">
     <label class="j-form-label" for="user_phone">연락처 <span class="j-form-span">*</span></label>
-    <input type="text" class="j-form-input" id="user_phone" name="user_phone" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');" placeholder="숫자만 입력해주세요(11자리)." minlength="11" maxlength="11" required>
+    <input type="text" class="j-form-input" id="user_phone" name="user_phone" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');" placeholder="숫자만 입력해주세요(11자리)." maxlength="11" required>
   </div>
   &nbsp;
   <div class="j-form-b_group">

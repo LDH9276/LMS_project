@@ -32,7 +32,6 @@
 include_once './db/db_conn.php'; // DB 연결
 include_once './db/config.php'; // 세션
 include_once './header.php'; // 헤더
-include_once './module/right/notice.php'; //우측메뉴
 ?>
 
 <?php
@@ -123,5 +122,8 @@ $learn_list = explode(',', $userRow['learn_list']);
     ?>
     </div>
 </div>
+<?php
+include_once './module/right/notice.php'; //우측메뉴
+?>
 </body>
 </html>
