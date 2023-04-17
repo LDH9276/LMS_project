@@ -1,0 +1,22 @@
+수업내용
+1. react기초 2시간
+2. 프로젝트 수행
+------------------------------
+git init
+git add .
+git status
+git branch -m master main
+git remote add origin 주소붙여넣기
+git commit -m '메세지' 
+git push origin +main
+----------------------------
+클래스룸 09AWS 에 
+리액트활용-배열데이터 입력/출력/삭제_홍길동.zip
+
+카페 리액트 게시판에 배포하여 git주소 올리기
+리액트활용-배열데이터 입력/출력/삭제_홍길동
+
+
+
+
+
