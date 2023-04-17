@@ -3,8 +3,13 @@
     <div class="ub-wrap">
       <div class="user-bg">
         <div class="notice-wrap">
+<<<<<<< HEAD
           <span class="notice-title">공지사항</span>
           <span class="notice-more"><a href="" title=""><span>더보기</span><i class="fa-solid fa-angle-right"></i></a></span>
+=======
+          <span class="r-notice-title">공지사항</span>
+          <span class="r-notice-more"><a href="" title=""><span>더보기</span><i class="fa-solid fa-angle-right"></i></a></span>
+>>>>>>> ksg
         </div>
         <ul class="notice-list">
           <?php

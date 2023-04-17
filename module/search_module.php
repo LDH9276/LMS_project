@@ -52,7 +52,6 @@ echo '<p class="learn_result">검색결과: '.count($unique_arr).'개</p>';}
     echo '<p class="learn_list-none">검색결과가 없습니다.</p>';
   } else {
 
-
   while ($unique_arr) {
     $tot = array_shift($unique_arr);
     $learnSQL = "SELECT * FROM learn_table WHERE learn_title = '$tot[learn_title]'";

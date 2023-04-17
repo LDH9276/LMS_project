@@ -1,0 +1,59 @@
+1. 패스워드 암호화하기
+
+
+0-------------------------------
+$con=crud
+
+create
+select(read)
+update
+delete
+
+
+--------------------------------
+isset -> 함수
+변수값이 맞는지 안맞는지 확인하는 함수
+if(isset(값)) 방정식;
+
+
+
+
+
+----------------------------
+
+notice_read.php
+if(isset($_GET['notice_view'])){
+$view_sql = "UPDATE board set views = views + 1 where num = {$num}";
+mysqli_query ($con, $view_sql);
+}
+
+
+
+<td><a href = 'read.php?id=<?$row['id']?>&notice_view=1'><?=$row['notice_title']?></a>
+
+<td width="500"><a href="read.php?board_id=notice&idx=<?php echo $board["idx"];?>"><?php echo $title;?></a></td>
+
+
+
+
+
+          $sql = mq("select * from notice order by idx desc limit 0,2");
+            while($board = $sql->fetch_array())
+            {
+              //title변수에 DB에서 가져온 title을 선택
+              $title=$board["title"];
+              if(strlen($title)>30)
+              {
+                //title이 30을 넘어서면 ...표시
+                $title=str_replace($board["title"],mb_substr($board["title"],0,30,"utf-8")."...",$board["title"]);
+              }
+
+
+
+
+            $result = mysqli_query($con, $query);
+            $row = mysqli_fetch_array($result);
+            $filelist = explode(',', $row['file']);
+            foreach($filelist as $list){
+              echo $list;
+            }

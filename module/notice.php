@@ -13,6 +13,13 @@
     <!-- 모듈 CSS -->
     <link rel="stylesheet" href="./css/notice.css" type="text/css" />
 
+<<<<<<< HEAD
+=======
+    <!-- 우측메뉴 -->
+    <link rel="stylesheet" href="./right/css/notice.css" type="text/css" />
+    <link rel="stylesheet" href="./right/css/todo.css" type="text/css" />
+
+>>>>>>> ksg
     <!-- 폰트어썸 -->
     <link
       rel="stylesheet"
@@ -28,6 +35,14 @@
 include_once '../db/db_conn.php'; // DB 연결
 include_once '../db/config.php'; // 세션
 include_once '../header.php'; // 헤더
+<<<<<<< HEAD
+=======
+if($userType == 1){
+  include_once './right/master_btn.php'; //우측메뉴
+} else {
+  include_once './right/notice_btn.php'; //우측메뉴
+}
+>>>>>>> ksg
 
 $id = $_GET['id']; // 주소창에서 받아오는 값
 $id = (int)$id;
