@@ -22,7 +22,7 @@ if(!$id == "" && !$verify == ""){
   SET learn_list = (
     SELECT GROUP_CONCAT(learn_title)
     FROM learn_apply
-    WHERE user_table.user_name = learn_apply.user_name
+    WHERE user_table.user_id = learn_apply.user_id
   )";
   $result = mysqli_query($conn, $user_insert);
   $learn_title = $row['learn_title'];

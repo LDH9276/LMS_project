@@ -74,6 +74,8 @@
     font-size: 20px;
   }
   #search input{
+    width: calc(100% - 50px);
+    background: none;
     -webkit-appearance: none;
     border: none;
     border-radius: 0px;
@@ -88,13 +90,7 @@
   }
   
   #search {
-    position: relative;
-    width: 275px;
-    height: 50px;
-    margin: 0 auto;
-    margin: 30px auto 20px auto;
-    line-height: 50px;
-    background-color: #fff;
+    display: none;
   }
   #search > input {
     width: 100%;

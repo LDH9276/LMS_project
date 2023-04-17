@@ -41,25 +41,34 @@ if(isset($_FILES['notice_file'])) {
   $files = null; //null로 반환한다.
 }
 
-if($mod == 'mod'){
+if($mod == 'mod'){ // 수정사항 확인 시
   if($files == null){
     $files = $prev_file;
   }
-  $update_sql = "update notice_list set notice_title='$notice_title', notice_text='$notice_text', notice_file='$files', notice_date='$notice_date' where num=$num";
-  $result = mysqli_query($conn, $update_sql); // sql에 저장된 명령 실행
-} else {
-  $sql = "insert into notice_list set notice_title='$notice_title', notice_text='$notice_text', notice_file='$files', notice_date='$notice_date'";
-  $result = mysqli_query($conn, $sql); // sql에 저장된 명령 실행  
+  $stmt = mysqli_prepare($conn, "UPDATE notice_list SET notice_title = ?, notice_text = ?, notice_file = ?, notice_date = ? WHERE notice_num = ?");
+  mysqli_stmt_bind_param($stmt, "ssssi", $notice_title, $notice_text, $files, $notice_date, $num);
+  mysqli_stmt_execute($stmt);
+} else { // 새로운 글 작성 시
+  $stmt = mysqli_prepare($conn, "INSERT INTO notice_list (notice_title, notice_text, notice_file, notice_date) VALUES (?, ?, ?, ?)");
+  mysqli_stmt_bind_param($stmt, "ssss", $notice_title, $notice_text, $files, $notice_date);
+  mysqli_stmt_execute($stmt);
 }
 
 
-if(!$result){
-  echo "<script>alert('글쓰기에 실패했습니다.');</script>";
-  echo "<script>location.href='./notice_list.php';</script>";
-  exit;
+if ($stmt->affected_rows == 1) {
+  echo('
+  <script>
+    alert("글이 작성되었습니다.");
+    location.href = "./notice_list.php";
+  </script>
+  ');
 } else {
-  echo "<script>alert('글쓰기에 성공했습니다.');</script>";
-  echo "<script>location.href='./notice_list.php';</script>";
-  exit;
+  echo('
+  <script>
+    alert("글 작성에 실패하였습니다.");
+    location.href = "./notice_list.php";
+  </script>
+  ');
 }
-?>
+mysqli_stmt_close($stmt);
+

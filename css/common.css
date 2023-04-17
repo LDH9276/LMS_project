@@ -81,6 +81,9 @@
     display: none;
   }
   #search input{
+    width: calc(100% - 50px);
+    line-height: 40px;
+    background: none;
     -webkit-appearance: none;
     border: none;
     border-radius: 0px;
@@ -419,7 +422,7 @@
     height: calc(100vh - 80px);
     color: #fff;
     text-align: center;
-    background-color: #002968;
+    background-color: #000;
     transition: .3s;
   }
   #h_side.act{
@@ -486,44 +489,13 @@
   }
   
   #search {
-    position: relative;
-    width: calc(100% - 32px);
-    height: 50px;
-    margin: 0 auto;
-    margin: 30px auto 20px auto;
-    line-height: 50px;
-    background-color: #fff;
-    position: relative;
-  }
-  #search input {
-    width: calc(100% - 50px);
-    font-size: 16px;
-    line-height: 50px;
-    background: none;
-  }
-  #search > button {
-    position: absolute;
-    right: 15px;
-    border: none;
-    background: none;
-    line-height: 50px;
-    cursor: pointer;
-  }
-  #search i {
-    /* position: absolute; */
-    /* right: 15px; */
-    color: #002968;
-    font-size: 24px;
-    transform: translateY(5px);
-  }
-  #search > input {
-    border: none;
-  }
-  #search > input:focus {
-    outline: none;
+    display: none;
   }
   #h_side > nav {
     margin-bottom: 20px;
+  }
+  #gnb{
+    background: var(--m-color01);
   }
   #gnb > li,
   #h_footer > ul li {
@@ -611,7 +583,7 @@
   
   .page-nav{
     display: flex;
-    width: calc(100% - 315px - 500px);
+    width: 100%;
     height : 120px;
     padding: 0px 50px;
     margin: 0px 315px 0;
@@ -623,10 +595,8 @@
   }
   
   .module {
-    width: calc(100% - 315px - 500px);
-    height: calc(100vh - 120px - 50px);
+    width: 100%;
     padding: 50px;
-    margin : 0px 315px;
     box-sizing: border-box;
     overflow-y: scroll;
     border-collapse: collapse;
@@ -646,29 +616,8 @@
   }
   
   /* 오른쪽 모듈 */
-  .master-btn{
-    position: fixed;
-    top:0px;
-    right: 0px;
-    width: 500px;
-    background: #efefef;
-    z-index: 15;
-  }
-  .right-module1{
-    position: fixed;
-    top:80px;
-    right: 0px;
-    width: 500px;
-    background: #efefef;
-    z-index: 15;
-  }
-  .right-module2{
-    position: fixed;
-    top:calc(80px + 50vh);
-    right: 0px;
-    width: 500px;
-    background: #efefef;
-    z-index: 15;
+  .master-btn, .user-right, .right-module1, .right-module2{
+    display: none;
   }
   .master-btn img{
     width: 100%; height: 50vh;

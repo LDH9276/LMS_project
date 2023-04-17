@@ -22,7 +22,7 @@ if($userRow['user_type'] == 3){
       <!-- 상단헤더 -->
       <h1>
         <a href="http://leedh9276.dothome.co.kr/lms/index.php" title="메인페이지로">
-          <img src="http://leedh9276.dothome.co.kr/lms/img/logo.svg" alt="헤더 로고" />
+          <img src="http://leedh9276.dothome.co.kr/lms/img/logo.svg" alt="헤더 로고">
         </a>
       </h1>
       <div id="h_wrap">
@@ -74,8 +74,8 @@ if($userRow['user_type'] == 3){
         </div>
         <div id="search">
           <form action="http://leedh9276.dothome.co.kr/lms/module/search.php" method="get">
-            <input type="search" name="search" />
-            <button type="submit"><i class="fa-solid fa-magnifying-glass"></i></button>
+            <input type="search" name="search" aria-labelledby="search">
+            <button type="submit" aria-label="search"><i class="fa-solid fa-magnifying-glass"></i></button>
           </form>
         </div>
         <nav>
@@ -204,7 +204,7 @@ if($userRow['user_type'] == 3){
             </li>
           </ul>
           <address>
-            Copyright(C) MYONGJI UNIVERSITY.<br />
+            Copyright(C) MYONGJI UNIVERSITY.<br>
             All rights reserved.
           </address>
         </div>
