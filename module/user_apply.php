@@ -29,12 +29,11 @@
 include_once '../db/db_conn.php'; //DB연결
 include_once '../db/config.php'; //DB세션
 include_once '../header.php'; //메뉴
-include_once './right/notice.php'; //우측메뉴
 
 
 $id = $_SESSION['lms_logon'];
 
-$sql = "SELECT user_num, user_major, user_id, user_name, learn_list FROM user_table WHERE user_id = '$id'";
+$sql = "SELECT user_num, user_major, user_id, user_name, learn_list, user_type FROM user_table WHERE user_id = '$id'";
 $result = mysqli_query($conn, $sql);
 $row = mysqli_fetch_array($result);
 
@@ -42,8 +41,18 @@ $major = $row['user_major'];
 $learn_list = $row['learn_list'];
 $learn_list = explode(',', $learn_list);
 
-$learnsql = "SELECT * FROM learn_table where learn_major like '%물마시기학과%' or learn_major like '%교양과목%'";
+$learnsql = "SELECT * FROM learn_table where learn_major like '%$major%' or learn_major like '%교양과목%'";
 $learn_result = mysqli_query($conn, $learnsql);
+
+if($row['user_type'] == 0){
+  echo '<script>alert("등록 대기중인 ID입니다.");</script>';
+  echo '<script>location.href="../index.php";</script>';
+  exit;
+} else if($row['user_type'] == 2){
+  echo '<script>alert("교직원 ID입니다. 강의등록을 이용해주세요");</script>';
+  echo '<script>location.href="../index.php";</script>';
+  exit;
+}
 
 ?>
 
@@ -105,5 +114,8 @@ $learn_result = mysqli_query($conn, $learnsql);
 
 </table>
 </div>
+<?php
+include_once './right/notice.php'; //우측메뉴
+?>
 </body>
 </html>

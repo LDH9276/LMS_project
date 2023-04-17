@@ -1,3 +1,7 @@
+<!-- 나의 일정 게시판 -->
+<!-- notice.php와 서식이 같아 클래스명이 동일합니다 -->
+<!-- 서식 수정 시 notice.css와 todo.css 둘 다 확인해주세요 -->
+
 
     <div class="ub-wrap">
       <div class="user-bg">

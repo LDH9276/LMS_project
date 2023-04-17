@@ -1,3 +1,5 @@
+<!-- 기본 우측메뉴 공지사항&나의일정 (유저용) -->
+
 
   <div class="user-right">
     <div class="ub-wrap">
@@ -31,6 +33,6 @@
     </div>
   </div>
   <?php
-      include 'list.php';
+      include 'list.php'; //나의 일정
       ?>
   </div>

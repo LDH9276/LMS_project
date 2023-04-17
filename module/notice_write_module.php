@@ -20,14 +20,10 @@ if($id == 'mod') {
   }
 ?>
 
-
-    <main>
-      <form name='write' method="post" action="writePost.php" enctype="multipart/form-data">
+    <form name='write' method="post" action="writePost.php" enctype="multipart/form-data">
         <input type="hidden" name="num" value="<?=$num?>">
         <input type="hidden" name="id" value="<?=$id?>">
-      <article>
-        <p><input type="submit" value="등록"></p>
-        <p><button type="button" id="n_btn" onclick="document.location.href='notice_list.php'">목록</button></p>
+      <div>
 
         <p class="write-title">
           <label for="notice_title">
@@ -47,7 +43,7 @@ if($id == 'mod') {
           <?php if($data['notice_file']) {?>
             <input type="hidden" name="prev_file" value="<?=$data['notice_file']?>">
           <?php }?>
-          <label for="file">
+          <label for="notice_file">
             첨부파일
           </label>
           <input type="file" name="notice_file" id="notice_file">
@@ -55,11 +51,9 @@ if($id == 'mod') {
             첨부파일
           </label>        
         </p>
-
-
-      </article>
-      </form>
-    </main>
-
-  </body>
-</html>
+        <p class="submit_btn-wrap">
+          <input type="submit" value="등록">
+          <button type="button" id="n_btn" onclick="document.location.href='notice_list.php'">목록</button>
+        </p>
+      </div>
+    </form>

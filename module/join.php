@@ -12,6 +12,7 @@
 
     <!-- 모듈 CSS -->
     <link rel="stylesheet" href="../css/user_apply.css" type="text/css" />
+    <link rel="stylesheet" href="./right/css/notice.css" type="text/css" />
 
     <!-- 폰트어썸 -->
     <link
@@ -31,6 +32,7 @@
 include_once '../db/db_conn.php'; // DB 연결
 include_once '../db/config.php'; // 세션
 include_once '../header.php'; // 헤더
+include_once './right/user_btn.php'; //우측메뉴
 ?>
 
 <div class="module">
@@ -38,12 +40,8 @@ include_once '../header.php'; // 헤더
       <!-- 메인 -->
       <main>
 <!-- 할일
-      1. 체크박스 스크립트 기능 넣기
-        1-1)전체동의시 전체 체크(완료)
-        1-2) 하나 해제시 전체동의 해제(완료)
-        1-3)일일히 동의 체크 했을시 전체동의에 체크되게 하기
-      3. 폼 디자인하기
-      3-1) 여백 css
+    1. 글자 최소값 넣기(아이디, 학번, 이메일, 연락처)
+    2. 아이디 숫자, 영문 필수 넣기?
 -->
 <link rel='stylesheet' href='./css/join.css' type='text/css'>
 <script>
@@ -64,6 +62,23 @@ include_once '../header.php'; // 헤더
           }else{
             checkInfoAjax();
           }
+        });
+        //비밀번호 확인
+        $('#user_password').blur(function(){
+          let reg =  /^(?=.*[a-zA-Z])(?=.*[!@#$%^*+=-])(?=.*[0-9]).{8,16}$/;
+          let txt = $('#user_password').val();
+          if($(this).val()==''){
+            // console.log('비밀번호체크1');
+            $('#pass_check_msg').html('비밀번호를 입력해주세요.').css('color','#f00').attr('data-check','0');
+          }else if( !reg.test(txt) ) {
+            console.log(txt);
+            $("#pass_check_msg").html("대문자, 소문자, 숫자, 특수문자 포함 8자리이상 입력해주세요.").css('color','#f00').attr('data-check','0');
+            
+        }else{
+          // console.log('비밀번호체크3');
+          // console.log(txt+"3번체크");
+          $("#pass_check_msg").html("&nbsp;").css('color','#f00').attr('data-check','1');
+        }
         });
       // id값을 post로 전송하여 서버와 통신을 통해 중복결과 json형태로 받아오기 위한 함수
         function checkIdAjax(){
@@ -160,12 +175,11 @@ include_once '../header.php'; // 헤더
           return false;
         }
 
-        let reg = "^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$";
-        let txt = "aaaa";
-        if( !reg.test(txt) ) {
-            document.getElementById("pass_check_msg").innerHTML = "비밀번호는 하나 이상의 대문자, 소문자, 숫자를 포함하여야 합니다.";
-            return false;
+        if($('#pass_check_msg').attr('data-check') != '1'){
+          $('#user_password').focus();
+          return false;
         }
+
         if(!$('#user_password2').val()){
           alert('비밀번호를 확인해주세요');
           $('#user_password2').focus();
@@ -183,23 +197,27 @@ include_once '../header.php'; // 헤더
           $('#user_info').focus();
           return false;
         }
-
+        if($('#info_check_msg').attr('data-check') != '1'){
+          alert('동일 학번이 존재합니다. 다시입력하세요.');
+          $('#user_info').focus();
+          return false;
+        }
         if(!$('#user_email').val()){
           alert('이메일주소를 입력해주세요');
           $('#user_email').focus();
           return false;
         }
         if (f.mb_email.value.length > 0) { // 이메일 형식 검사
-          var regExp = /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/i;
+          var regExp = /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/;
           if (f.mb_email.value.match(regExp) == null) {
             alert("이메일 주소가 형식에 맞지 않습니다.");
             f.mb_email.focus();
             return false;
-          }      
+          }
         }
         
         if(!$('#user_phone').val()){
-          alert('학번을 입력해주세요');
+          alert('연락처를 입력해주세요');
           $('#phone').focus();
           return false;
         }
@@ -207,7 +225,7 @@ include_once '../header.php'; // 헤더
         if($('#user_password').val()!=$('#user_password2').val()){
           alert('비밀번호가 일치하지 않습니다. \n 다시 입력하여 주세요.');
           $('#user_password').focus();
-
+          return false;
         }
         if$('.join_agree').click(function(){
         let total = $(".join_agree").length;//전체 체크박스수
@@ -1189,43 +1207,43 @@ include_once '../header.php'; // 헤더
   <div class="j-form">
   <div class="j-form-f">
     <label class="j-form-label" for="user_id">아이디 <span class="j-form-span">*</span></label>
-    <input type="text" class="j-form-input" id="user_id" maxlength="16" minlength="6" name="user_id" required>
+    <input type="text" class="j-form-input" id="user_id" maxlength="16" name="user_id" oninput="this.value = this.value.replace(/[^a-zA-Z0-9]/gi, '');" placeholder="영문, 숫자만 입력가능합니다." required>
   </div>
   <div>
     <span id="id_check_msg" data-check="0">&nbsp;</span>
   </div>
   <div class="j-form-f">
     <label class="j-form-label" for="user_password">비밀번호 <span class="j-form-span">*</span></label>
-    <input type="password" class="j-form-input" id="user_password" maxlength="16" minlength="8" name="user_password" required>
+    <input type="password" class="j-form-input" id="user_password" maxlength="16"  name="user_password" placeholder="대문자, 소문자, 숫자, 특수문자를 포함하여야 합니다(8자리 이상)." required>
   </div>
   <div>
     <span id="pass_check_msg" data-check="0">&nbsp;</span>
   </div>
   <div class="j-form-f">
     <label class="j-form-label" for="user_password2">비밀번호 확인 <span class="j-form-span">*</span></label>
-    <input type="password" class="j-form-input" id="user_password2" required>
+    <input type="password" class="j-form-input" id="user_password2" maxlength="16" required>
   </div>
   &nbsp;
   <div class="j-form-f">
     <label class="j-form-label" for="user_name">이름 <span class="j-form-span">*</span></label>
-    <input type="text" class="j-form-input" id="user_name" name="user_name" required>
+    <input type="text" class="j-form-input" id="user_name" name="user_name" maxlength="16" required>
   </div>
   &nbsp;
   <div class="j-form-f">
     <label class="j-form-label" for="user_info">학번 <span class="j-form-span">*</span></label>
-    <input type="text" class="j-form-input" id="user_info" name="user_info" required>
+    <input type="text" class="j-form-input" id="user_info" name="user_info" maxlength="6" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');" placeholder="숫자만 입력가능합니다." required>
   </div>
   <div>
-    <span id="info_check_msg" data-check="0">  &nbsp;</span>
+    <span id="info_check_msg" data-check="0">&nbsp;</span>
 </div>
   <div class="j-form-f">
     <label class="j-form-label" for="user_email">이메일 <span class="j-form-span">*</span></label>
-    <input type="email" class="j-form-input" id="user_email" name="user_email" placeholder="ex) abcd@domain.com"required >
+    <input type="email" class="j-form-input" id="user_email" name="user_email"  maxlength="16" placeholder="ex) abcd@domain.com"required >
   </div>
   &nbsp;
   <div class="j-form-f">
     <label class="j-form-label" for="user_phone">연락처 <span class="j-form-span">*</span></label>
-    <input type="text" class="j-form-input" id="user_phone" name="user_phone" required>
+    <input type="text" class="j-form-input" id="user_phone" name="user_phone" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');" placeholder="숫자만 입력해주세요(11자리)." maxlength="11" required>
   </div>
   &nbsp;
   <div class="j-form-b_group">

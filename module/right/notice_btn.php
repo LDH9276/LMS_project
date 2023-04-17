@@ -1,3 +1,6 @@
+<!-- 공지사항 게시판에서 출력되는 우측메뉴(유저용) 이미지&나의일정 -->
+
+
 <div class="master-btn">
 
   <img src="http://leedh9276.dothome.co.kr/lms/module/right/img/master_menu.png" alt="마스터">
