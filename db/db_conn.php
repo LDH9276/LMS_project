@@ -3,10 +3,6 @@
 <?php
 
 //변수선언
-$mysql_host = 'localhost';
-$mysql_user="root";
-$mysql_password="";
-$mysql_db="lms_sample";
 
 // 데이터베이스에 연결하는 함수
 $conn = mysqli_connect($mysql_host, $mysql_user, $mysql_password, $mysql_db);
