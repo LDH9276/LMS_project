@@ -17,3 +17,16 @@
   line-height: 70px;
   font-size: 14px;
 }
+
+.todo-list > li > a{
+  width:70%;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  text-align: left;
+}
+
+.todo-list > li > span{
+  width:30%;
+  text-align: right;
+}

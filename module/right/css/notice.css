@@ -85,10 +85,15 @@ a{
   font-size: 14px;
 }
 
-.notice-list > li {
-
+.notice-list > li > a {
+  width:70%;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  text-align: left;
 }
 
-/* .notice-list > li > span{
-  line-height: 40px;
-} */
+.notice-list > li > span{
+  width:30%;
+  text-align: right;
+}

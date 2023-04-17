@@ -1,3 +1,5 @@
+<!-- 관리자용 우측메뉴 -->
+
 <div class="master-btn">
 
   <img src="http://leedh9276.dothome.co.kr/lms/module/right/img/master_menu.png" alt="마스터">

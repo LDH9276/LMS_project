@@ -4,6 +4,8 @@
   width: 100%;
   height: 100%;
   border-collapse: collapse;
+  display: table;
+  table-layout: fixed;
 }
 
 .notice th{
@@ -17,6 +19,7 @@
   line-height: 50px;
   text-align: center;
 }
+
 .notice-num{
   width:10%;
 }
@@ -24,6 +27,7 @@
   width: 50%;
   text-align: left;
   padding-left: 20px;
+  display: table-cell
 }
 .notice-view{
   width: 10%;
@@ -40,6 +44,9 @@
   width: 100%;
   height: 100%;
   text-align: left;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
 }
 .prev, .next{
   background: var(--m-color01);

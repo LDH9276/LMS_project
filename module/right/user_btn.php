@@ -1,3 +1,5 @@
+<!-- 비로그인시 보이는 우측메뉴 이미지&공지사항 -->
+
 <div class="master-btn">
 
   <img src="http://leedh9276.dothome.co.kr/lms/module/right/img/master_menu.png" alt="마스터">
