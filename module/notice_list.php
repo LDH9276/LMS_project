@@ -33,7 +33,7 @@ include_once '../header.php'; // 헤더
 if($userType == 1){
   include_once './right/master_btn.php'; //우측메뉴
 } else {
-  include_once './right/notice.php'; //우측메뉴
+  include_once './right/notice_btn.php'; //우측메뉴
 }
 ?>
 

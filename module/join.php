@@ -65,6 +65,22 @@ include_once '../header.php'; // 헤더
             checkInfoAjax();
           }
         });
+        //비밀번호 확인
+        $('#user_password').blur(function(){
+          let reg =  /^(?=.*[a-zA-Z])(?=.*[!@#$%^*+=-])(?=.*[0-9]).{8,15}$/;
+          let txt = $('#user_password').val();
+          if($(this).val()==''){
+            console.log('비밀번호체크1');
+            $('#pass_check_msg').html('비밀번호를 입력해주세요.').css('color','#f00').attr('data-check','0');
+          }else if( !reg.test(txt) ) {
+            console.log(txt);
+            $("#pass_check_msg").html("비밀번호는 하나 이상의 대문자, 소문자, 특수문자를 포함하여야 합니다.").css('color','#f00').attr('data-check','0');
+        }else{
+          console.log('비밀번호체크3');
+          console.log(txt+"3번체크");
+          $("#pass_check_msg").html("&nbsp;").css('color','#f00').attr('data-check','1');
+        }
+        });
       // id값을 post로 전송하여 서버와 통신을 통해 중복결과 json형태로 받아오기 위한 함수
         function checkIdAjax(){
           $.ajax({
@@ -160,12 +176,11 @@ include_once '../header.php'; // 헤더
           return false;
         }
 
-        let reg = "^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$";
-        let txt = "aaaa";
-        if( !reg.test(txt) ) {
-            document.getElementById("pass_check_msg").innerHTML = "비밀번호는 하나 이상의 대문자, 소문자, 숫자를 포함하여야 합니다.";
-            return false;
+        if($('#pass_check_msg').attr('data-check') != '1'){
+          $('#user_password').focus();
+          return false;
         }
+
         if(!$('#user_password2').val()){
           alert('비밀번호를 확인해주세요');
           $('#user_password2').focus();
@@ -183,23 +198,27 @@ include_once '../header.php'; // 헤더
           $('#user_info').focus();
           return false;
         }
-
+        if($('#info_check_msg').attr('data-check') != '1'){
+          alert('동일 학번이 존재합니다. 다시입력하세요.');
+          $('#user_info').focus();
+          return false;
+        }
         if(!$('#user_email').val()){
           alert('이메일주소를 입력해주세요');
           $('#user_email').focus();
           return false;
         }
         if (f.mb_email.value.length > 0) { // 이메일 형식 검사
-          var regExp = /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/i;
+          var regExp = /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/;
           if (f.mb_email.value.match(regExp) == null) {
             alert("이메일 주소가 형식에 맞지 않습니다.");
             f.mb_email.focus();
             return false;
-          }      
+          }
         }
         
         if(!$('#user_phone').val()){
-          alert('학번을 입력해주세요');
+          alert('연락처를 입력해주세요');
           $('#phone').focus();
           return false;
         }
@@ -207,7 +226,7 @@ include_once '../header.php'; // 헤더
         if($('#user_password').val()!=$('#user_password2').val()){
           alert('비밀번호가 일치하지 않습니다. \n 다시 입력하여 주세요.');
           $('#user_password').focus();
-
+          return false;
         }
         if$('.join_agree').click(function(){
         let total = $(".join_agree").length;//전체 체크박스수

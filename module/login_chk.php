@@ -20,20 +20,19 @@ include_once('../db/config.php');
         location.href = "../index.php";
       </script>
       ');
-  } else {
-    echo('
-    <script>
-      alert("비밀번호가 틀렸습니다.");
-      location.href = "./login.php";
-    </script>
-    ');
+  } if(!$id || !$pw) {
+    echo "<script>alert('아이디 또는 비밀번호를 입력해주세요.'); location.replace('./login.php');</script>";
+    exit;
   }
+  } if(!$row['user_id']) {
+    echo "<script>alert('일치하는 아이디가 없습니다.'); location.replace('./login.php');</script>";
+    exit;
   } else {
-    echo('
-    <script>
-      alert("아이디가 틀렸습니다.");
-      location.href = "./login.php";
-    </script>
-    ');
+    // 비밀번호 확인
+    //password_verify(입력값, DB값) : 입력값과 DB값이 일치하면 true, 아니면 false (복호화 기능도 포함)
+    if (!password_verify($pw, $row['user_password'])) { // 로그인 실패
+      echo "<script>alert('비밀번호가 일치하지 않습니다.'); location.replace('./login.php');</script>";
+      exit;
+    }
   }
 ?>

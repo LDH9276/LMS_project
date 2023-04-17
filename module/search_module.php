@@ -39,12 +39,6 @@ if($totalRow == null){
 
 
 <p>
-
-<?php
-if (!$unique_arr == null){
-echo '<p class="learn_result">검색결과: '.count($unique_arr).'개</p>';}
-?>
-
 <div class="learn_list-wrap">
 
 <?php
@@ -64,8 +58,6 @@ echo '<p class="learn_result">검색결과: '.count($unique_arr).'개</p>';}
     } 
 
     ?>
-
-
     <div class="index-class-wrap">
       <a href="./learn.php?id=<?=$row3['learn_num']?>" title="<?=$row3['learn_title']?>">
       <img src="./img/learn_thumb/<?=$row3['learn_thumb']?>" alt="<?=$row3['learn_title']?>" class="class-thumb">
