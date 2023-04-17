@@ -33,12 +33,12 @@
               echo '<td class="notice-num">'.$nl_num.'</td>';
               echo '<td class="notice-title"><a href="notice.php?id='.$nl_num.'">'.$nl_title.'</a></td>';
               if($nl_file == NULL){
-                echo '<td>없음</td>';
+                echo '<td class="notice-file">없음</td>';
               }else{
-                echo '<td><i class="fa-solid fa-paperclip"></i></td>';
+                echo '<td class="notice-file"><i class="fa-solid fa-paperclip"></i></td>';
               }
-              echo '<td>'.$nl_date.'</td>';
-              echo '<td>'.$nl_view.'</td>';
+              echo '<td class="notice-date">'.$nl_date.'</td>';
+              echo '<td class="notice-view">'.$nl_view.'</td>';
               echo '</tr>';
             }
           ?>
