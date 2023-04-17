@@ -13,6 +13,10 @@
     <!-- 모듈 CSS -->
     <link rel="stylesheet" href="./css/index.css" type="text/css" />
 
+    <!-- 우측메뉴css -->
+    <link rel="stylesheet" href="./module/right/css/notice.css" type="text/css" />
+    <link rel="stylesheet" href="./module/right/css/todo.css" type="text/css" />
+
     <!-- 폰트어썸 -->
     <link
       rel="stylesheet"

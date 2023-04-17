@@ -45,47 +45,27 @@ a{
   line-height: 60px;
 }
 
-<<<<<<< HEAD
-.notice-wrap > span:first-child{
-=======
 .r-notice-title{
->>>>>>> ksg
   font-size: 24px;
   width:315px;
   padding-left:30px;
 }
-<<<<<<< HEAD
-.notice-wrap > span:nth-child(2){
-=======
 .r-notice-more{
->>>>>>> ksg
   background: var(--m-color04);
   width:125px;
   text-align: right;
 }
 
-<<<<<<< HEAD
-.notice-more > a{
-=======
 .r-notice-more > a{
->>>>>>> ksg
   margin-right: 20px;
   color: #fff;
 }
 
-<<<<<<< HEAD
-.notice-more > a > span{
-  margin-right: 20px;
-}
-
-.user-bg > .notice-list{
-=======
 .r-notice-more > a > span{
   margin-right: 20px;
 }
 
 .notice-list{
->>>>>>> ksg
   width:440px;
   text-align: center;
   margin:0px auto;
