@@ -1,0 +1,24 @@
+@charset "utf-8";
+
+
+
+/* 주차별 */
+.learn_weekly-title{
+  display: block;
+  font-size: 16px;
+  font-weight: 800;
+  color: var(--m-color02);
+  width: 100%;
+  line-height: 40px;
+  text-indent: 16px;
+  background: var(--m-color01);
+}
+.learn_weekly{
+width: 100%;
+height: 6.25em;
+border: 1px solid var(--m-color03);
+box-sizing: border-box;
+resize: none;
+padding: 16px;
+font-size: 16px;
+}
