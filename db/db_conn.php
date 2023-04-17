@@ -1,10 +1,7 @@
 <?php
 
 // 데이터베이스 접속 정보
-$mysql_host = 'localhost';
-$mysql_user = 'root';
-$mysql_password = '';
-$mysql_db = 'lms_sample';
+// 각 아래 변수 주소를 담을 것.
 
 // 데이터베이스에 연결하는 함수
 $conn = mysqli_connect($mysql_host, $mysql_user, $mysql_password, $mysql_db);
