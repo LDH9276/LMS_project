@@ -13,6 +13,7 @@
     <!-- 모듈 CSS -->
     <link rel="stylesheet" href="../css/user_apply.css" type="text/css" />
     <link rel="stylesheet" href="./right/css/notice.css" type="text/css" />
+    <link rel="stylesheet" href="./right/css/todo.css" type="text/css" />
 
     <!-- 폰트어썸 -->
     <link
@@ -25,6 +26,7 @@
 
     <!-- join -->
     <link rel='stylesheet' href='./css/join.css' type='text/css'>
+    <script src="../script/join.js" defer></script>
 <body>
 
 <?php
@@ -32,216 +34,17 @@
 include_once '../db/db_conn.php'; // DB 연결
 include_once '../db/config.php'; // 세션
 include_once '../header.php'; // 헤더
-include_once './right/user_btn.php'; //우측메뉴
+include_once './right/user_btn.php'; // 우측메뉴
 ?>
 
 <div class="module">
-<!--여기에 내용 삽입-->
       <!-- 메인 -->
-      <main>
+<main>
 <!-- 할일
-    1. 글자 최소값 넣기(아이디, 학번, 이메일, 연락처)
     2. 아이디 숫자, 영문 필수 넣기?
+    4. 비밀번호 특수문자 제한하기?
 -->
-<link rel='stylesheet' href='./css/join.css' type='text/css'>
-<script>
-  
-      // 회원가입 입력양식에 대한 유효성 검사
-      $(document).ready(function(){
-
-        $('#user_id').blur(function(){
-          if($(this).val()==''){
-            $('#id_check_msg').html('아이디를 입력해주세요.').css('color','#f00').attr('data-check','0');
-          }else{
-            checkIdAjax();
-          }
-        });
-        $('#user_info').blur(function(){
-          if($(this).val()==''){
-            $('#info_check_msg').html('학번을 입력해주세요.').css('color','#f00').attr('data-check','0');
-          }else{
-            checkInfoAjax();
-          }
-        });
-        //비밀번호 확인
-        $('#user_password').blur(function(){
-          let reg =  /^(?=.*[a-zA-Z])(?=.*[!@#$%^*+=-])(?=.*[0-9]).{8,16}$/;
-          let txt = $('#user_password').val();
-          if($(this).val()==''){
-            // console.log('비밀번호체크1');
-            $('#pass_check_msg').html('비밀번호를 입력해주세요.').css('color','#f00').attr('data-check','0');
-          }else if( !reg.test(txt) ) {
-            console.log(txt);
-            $("#pass_check_msg").html("대문자, 소문자, 숫자, 특수문자 포함 8자리이상 입력해주세요.").css('color','#f00').attr('data-check','0');
-            
-        }else{
-          // console.log('비밀번호체크3');
-          // console.log(txt+"3번체크");
-          $("#pass_check_msg").html("&nbsp;").css('color','#f00').attr('data-check','1');
-        }
-        });
-      // id값을 post로 전송하여 서버와 통신을 통해 중복결과 json형태로 받아오기 위한 함수
-        function checkIdAjax(){
-          $.ajax({
-            async : false,
-            url:'./ajax/check_id.php',
-            type:'post',
-            dataType:'JSON',
-            data:{
-              'user_id':$('#user_id').val(),
-              'user_info':$('#user_info').val()
-            },
-            success:function(data){
-              if(data.check){
-                $('#id_check_msg').html('사용 가능한 아이디입니다.').css('color','#00f').attr('data-check','1');
-              }else{
-                $('#id_check_msg').html('중복된 아이디입니다.').css('color','#f00').attr('data-check','0');
-              }
-            }
-          });
-        }
-
-        function checkInfoAjax(){
-          $.ajax({
-            async : false,
-            url:'./ajax/check_c_num.php',
-            type:'post',
-            dataType:'JSON',
-            data:{
-              'user_info':$('#user_info').val()
-            },
-            success:function(data){
-              console.log(data);
-              if(data.check){
-                $('#info_check_msg').html('OK').css('color','#00f').attr('data-check','1');
-              }else{
-                $('#info_check_msg').html('이미 등록된 학번입니다.').css('color','#f00').attr('data-check','0');
-              }
-            }
-          });
-        }
-        // 체크박스 스크립트
-        // 전체 동의 클릭시 모두 체크
-        $('#j-form_agreeall').click(function(){
-          let checked = $(this).is(":checked");
-          if(checked){
-            $("#join_agree01").prop("checked", true);
-            $("#join_agree02").prop("checked", true);
-          }else{
-            $("#join_agree01").prop("checked", false);
-            $("#join_agree02").prop("checked", false);
-          }
-        });
-
-        // 미체크된게 있으면 전체동의 해제되고 모두 체크되면 전체동의도 체크
-      $('.join_agree').click(function(){
-        let checked = $(this).is(":checked");
-        if(!checked){
-          $("#j-form_agreeall").prop("checked", false);
-        }else{
-          $("#j-form_agreeall").prop("checked", true);
-        }
-      });
-      //체크박스 체크된 갯수 확인해서 전체동의 체크/해제
-      $('.join_agree').click(function(){
-        let total = $(".join_agree").length;//전체 체크박스수
-        let checked = $(".join_agree-label:checked").length;//체크된 체크박스 수
-        // 
-        if(total != checked){
-          // console.log(total);
-          // console.log(checked);
-          $("#j-form_agreeall").prop("checked", false);
-        }else{
-          $("#j-form_agreeall").prop("checked", true);
-        }
-      });
-        // 폼 
-        $('#save_frm').click(function(){
-          if(!$('#user_id').val()){//아이디값을 입력하지 않은 경우
-          alert('아이디를 입력해주세요');
-          $('#user_id').focus(); //초점을 아이디 입력박스에 만든다
-          return false;
-        }
-
-        if($('#id_check_msg').attr('data-check') != '1'){
-          alert('아이디가 존재합니다. 다시입력하세요.');
-          $('#id').focus();
-          return false;
-        }
-
-        if(!$('#user_password').val()){
-          alert('비밀번호를 입력해주세요');
-          $('#user_password').focus();
-          return false;
-        }
-
-        if($('#pass_check_msg').attr('data-check') != '1'){
-          $('#user_password').focus();
-          return false;
-        }
-
-        if(!$('#user_password2').val()){
-          alert('비밀번호를 확인해주세요');
-          $('#user_password2').focus();
-          return false;
-        }
-
-        if(!$('#user_name').val()){
-          alert('이름을 입력해주세요');
-          $('#user_name').focus();
-          return false;
-        }
-
-        if(!$('#user_info').val()){
-          alert('학번을 입력해주세요');
-          $('#user_info').focus();
-          return false;
-        }
-        if($('#info_check_msg').attr('data-check') != '1'){
-          alert('동일 학번이 존재합니다. 다시입력하세요.');
-          $('#user_info').focus();
-          return false;
-        }
-        if(!$('#user_email').val()){
-          alert('이메일주소를 입력해주세요');
-          $('#user_email').focus();
-          return false;
-        }
-        if (f.mb_email.value.length > 0) { // 이메일 형식 검사
-          var regExp = /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/;
-          if (f.mb_email.value.match(regExp) == null) {
-            alert("이메일 주소가 형식에 맞지 않습니다.");
-            f.mb_email.focus();
-            return false;
-          }
-        }
-        
-        if(!$('#user_phone').val()){
-          alert('연락처를 입력해주세요');
-          $('#phone').focus();
-          return false;
-        }
-
-        if($('#user_password').val()!=$('#user_password2').val()){
-          alert('비밀번호가 일치하지 않습니다. \n 다시 입력하여 주세요.');
-          $('#user_password').focus();
-          return false;
-        }
-        if$('.join_agree').click(function(){
-        let total = $(".join_agree").length;//전체 체크박스수
-        let checked = $(".join_agree-label:checked").length;//체크된 체크박스 수
-        // 
-        if(total != checked){
-          // console.log(total);
-          // console.log(checked);
-        }
-        return false;
-      });
-
-        $('#member_form').submit();
-    });
-  });
-    </script>
+    
 <!-- 회원가입 -->
 <form name="회원가입" id="member_form" method="post" action="member_insert.php">
   <h2 class="j-form-h2">회원가입  <span class="j-form-span j-form-h2_span">* 는 필수 입력 사항입니다.</span></h2>
@@ -505,7 +308,7 @@ include_once './right/user_btn.php'; //우측메뉴
     </textarea>
     <p>
       <label for="join_agree01" class="join_agree">
-      <input type="checkbox" name="join_agree01" id="join_agree01" class="join_agree-label" value="Y" required> 이용약관 내용을 확인했으며 약관에 동의합니다.</label>
+      <input type="checkbox" name="join_agree01" id="join_agree01" class="join_agree-label" value="Y" > 이용약관 내용을 확인했으며 약관에 동의합니다.</label>
     </p>
   </div>
   <!-- 개인정보수집 및 이용동의 -->
@@ -1194,12 +997,12 @@ include_once './right/user_btn.php'; //우측메뉴
     </textarea>
     <p>
       <label for="join_agree02" class="join_agree">
-      <input type="checkbox" name="join_agree02" id="join_agree02" class="join_agree-label" value="Y" required> 개인정보 수집 및 이용에 동의합니다.</label>
+      <input type="checkbox" name="join_agree02" id="join_agree02" class="join_agree-label" value="Y" > 개인정보 수집 및 이용에 동의합니다.</label>
     </p>
   </div>
   <p class="j-form_a_a_p">
   <label for="j-form_agreeall" class="j-form_agreeall">
-      <input type="checkbox" name="j-form_agreeall" id="j-form_agreeall" value="Y" required> 전체 동의</label>
+      <input type="checkbox" name="j-form_agreeall" id="j-form_agreeall" value="Y" > 전체 동의</label>
 </p>
     </div>
 
@@ -1207,45 +1010,57 @@ include_once './right/user_btn.php'; //우측메뉴
   <div class="j-form">
   <div class="j-form-f">
     <label class="j-form-label" for="user_id">아이디 <span class="j-form-span">*</span></label>
-    <input type="text" class="j-form-input" id="user_id" maxlength="16" name="user_id" oninput="this.value = this.value.replace(/[^a-zA-Z0-9]/gi, '');" placeholder="영문, 숫자만 입력가능합니다." required>
+    <input type="text" class="j-form-input" id="user_id" maxlength="16" name="user_id" oninput="this.value = this.value.replace(/[^a-zA-Z0-9]x/gi, '');" placeholder="영문, 숫자포함(6자리 이상)." >
   </div>
   <div>
     <span id="id_check_msg" data-check="0">&nbsp;</span>
   </div>
   <div class="j-form-f">
     <label class="j-form-label" for="user_password">비밀번호 <span class="j-form-span">*</span></label>
-    <input type="password" class="j-form-input" id="user_password" maxlength="16"  name="user_password" placeholder="대문자, 소문자, 숫자, 특수문자를 포함하여야 합니다(8자리 이상)." required>
+    <input type="password" class="j-form-input" id="user_password" maxlength="16"  name="user_password" placeholder="대문자, 소문자, 숫자, 특수문자 포함(8자리 이상)." >
   </div>
   <div>
     <span id="pass_check_msg" data-check="0">&nbsp;</span>
   </div>
+  <div class="j-form-list">
+    <ul class="j-form-ul">
+      <li class="j-form-li">
+      비밀번호는 8~16자의 영문 대/소문자, 숫자, 특수문자(!@#$%^&*) 를 혼합해서 사용하실 수 있습니다.
+      </li>
+      <li class="j-form-li">
+      아이디와 생일, 전화번호 등 개인정보와 관련된 숫자, 연속된 숫자, 반복된 문자 등 다른 사람이 쉽게 알아 낼 수 있는 비밀번호는 개인정보 유출의 위험이 높으므로 사용을 자제해 주시기 바랍니다.
+      </li>
+    </ul>
+  </div>
   <div class="j-form-f">
     <label class="j-form-label" for="user_password2">비밀번호 확인 <span class="j-form-span">*</span></label>
-    <input type="password" class="j-form-input" id="user_password2" maxlength="16" required>
+    <input type="password" class="j-form-input" id="user_password2" maxlength="16" >
   </div>
-  &nbsp;
+  <div>
+    <span id="pass_check_msg2" data-check="0">&nbsp;</span>
+  </div>
   <div class="j-form-f">
     <label class="j-form-label" for="user_name">이름 <span class="j-form-span">*</span></label>
-    <input type="text" class="j-form-input" id="user_name" name="user_name" maxlength="16" required>
+    <input type="text" class="j-form-input" oninput="this.value = this.value.replace(/[^a-z|A-Z|ㄱ-ㅎ|가-힣]/g, '');" id="user_name" name="user_name" maxlength="16" >
   </div>
   &nbsp;
   <div class="j-form-f">
     <label class="j-form-label" for="user_info">학번 <span class="j-form-span">*</span></label>
-    <input type="text" class="j-form-input" id="user_info" name="user_info" maxlength="6" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');" placeholder="숫자만 입력가능합니다." required>
+    <input type="text" class="j-form-input" id="user_info" name="user_info" maxlength="6" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');" placeholder="숫자만 입력가능합니다(6자리)." >
   </div>
   <div>
     <span id="info_check_msg" data-check="0">&nbsp;</span>
 </div>
   <div class="j-form-f">
     <label class="j-form-label" for="user_email">이메일 <span class="j-form-span">*</span></label>
-    <input type="email" class="j-form-input" id="user_email" name="user_email"  maxlength="16" placeholder="ex) abcd@domain.com"required >
+    <input type="email" class="j-form-input" id="user_email" name="user_email"  maxlength="16" placeholder="ex) abcd@domain.com"  >
   </div>
   &nbsp;
   <div class="j-form-f">
     <label class="j-form-label" for="user_phone">연락처 <span class="j-form-span">*</span></label>
-    <input type="text" class="j-form-input" id="user_phone" name="user_phone" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');" placeholder="숫자만 입력해주세요(11자리)." maxlength="11" required>
+    <input type="text" class="j-form-input" id="user_phone" name="user_phone" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');" placeholder="숫자만 입력가능합니다(최대11자리)." maxlength="11" >
   </div>
-  &nbsp;
+    <span id="phone_check_msg" data-check="0">&nbsp;</span>
   <div class="j-form-b_group">
     <button class="j-form-btn j-form-btn01" type="reset">초기화</button>
     <button class="j-form-btn j-form-btn02" type="submit" id="save_frm">확인</button>
@@ -1253,5 +1068,6 @@ include_once './right/user_btn.php'; //우측메뉴
 </div>
     </form>
     </main>
+  </div>
 </body>
 </html>
