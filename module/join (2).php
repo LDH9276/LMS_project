@@ -12,7 +12,6 @@
 
     <!-- 모듈 CSS -->
     <link rel="stylesheet" href="../css/user_apply.css" type="text/css" />
-    <link rel="stylesheet" href="./right/css/notice.css" type="text/css" />
 
     <!-- 폰트어썸 -->
     <link
@@ -32,7 +31,6 @@
 include_once '../db/db_conn.php'; // DB 연결
 include_once '../db/config.php'; // 세션
 include_once '../header.php'; // 헤더
-include_once './right/user_btn.php'; //우측메뉴
 ?>
 
 <div class="module">

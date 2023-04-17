@@ -16,8 +16,8 @@ include_once '../db/config.php'; // 세션 시작
     <link rel="stylesheet" href="../css/common.css" type="text/css" />
 
     <!-- 모듈 CSS -->
-    <link rel="stylesheet" href="../css/master_apply.css" type="text/css" />
     <link rel="stylesheet" href="./css/login.css" type="text/css" />
+    <link rel="stylesheet" href="./right/css/notice.css" type="text/css" />
 
     <!-- 폰트어썸 -->
     <link
@@ -32,6 +32,7 @@ include_once '../db/config.php'; // 세션 시작
 <?php
 // PHP 모듈 
 include_once '../header.php'; // 헤더
+include_once './right/user_btn.php'; //우측메뉴
 ?>
 <div class="module">
 <div class="login-form-div">
