@@ -40,11 +40,7 @@ include_once './right/user_btn.php'; // 우측메뉴
 <div class="module">
       <!-- 메인 -->
 <main>
-<!-- 할일
-    2. 아이디 숫자, 영문 필수 넣기?
-    4. 비밀번호 특수문자 제한하기?
--->
-    
+
 <!-- 회원가입 -->
 <form name="회원가입" id="member_form" method="post" action="member_insert.php">
   <h2 class="j-form-h2">회원가입  <span class="j-form-span j-form-h2_span">* 는 필수 입력 사항입니다.</span></h2>
@@ -308,7 +304,11 @@ include_once './right/user_btn.php'; // 우측메뉴
     </textarea>
     <p>
       <label for="join_agree01" class="join_agree">
+<<<<<<< HEAD
       <input type="checkbox" name="join_agree01" id="join_agree01" class="join_agree-label" value="Y" > 이용약관 내용을 확인했으며 약관에 동의합니다.</label>
+=======
+      <input type="checkbox" name="join_agree01" id="join_agree01" class="join_agree-label" value="Y" required> 이용약관 내용을 확인했으며 약관에 동의합니다.</label>
+>>>>>>> jjy
     </p>
   </div>
   <!-- 개인정보수집 및 이용동의 -->
@@ -997,12 +997,20 @@ include_once './right/user_btn.php'; // 우측메뉴
     </textarea>
     <p>
       <label for="join_agree02" class="join_agree">
+<<<<<<< HEAD
       <input type="checkbox" name="join_agree02" id="join_agree02" class="join_agree-label" value="Y" > 개인정보 수집 및 이용에 동의합니다.</label>
+=======
+      <input type="checkbox" name="join_agree02" id="join_agree02" class="join_agree-label" value="Y" required> 개인정보 수집 및 이용에 동의합니다.</label>
+>>>>>>> jjy
     </p>
   </div>
   <p class="j-form_a_a_p">
   <label for="j-form_agreeall" class="j-form_agreeall">
+<<<<<<< HEAD
       <input type="checkbox" name="j-form_agreeall" id="j-form_agreeall" value="Y" > 전체 동의</label>
+=======
+      <input type="checkbox" name="j-form_agreeall" id="j-form_agreeall" value="Y" required> 전체 동의</label>
+>>>>>>> jjy
 </p>
     </div>
 
@@ -1010,18 +1018,27 @@ include_once './right/user_btn.php'; // 우측메뉴
   <div class="j-form">
   <div class="j-form-f">
     <label class="j-form-label" for="user_id">아이디 <span class="j-form-span">*</span></label>
+<<<<<<< HEAD
     <input type="text" class="j-form-input" id="user_id" maxlength="16" name="user_id" oninput="this.value = this.value.replace(/[^a-zA-Z0-9]x/gi, '');" placeholder="영문, 숫자포함(6자리 이상)." >
+=======
+    <input type="text" class="j-form-input" id="user_id" maxlength="16" minlength="6" name="user_id" required>
+>>>>>>> jjy
   </div>
   <div>
     <span id="id_check_msg" data-check="0">&nbsp;</span>
   </div>
   <div class="j-form-f">
     <label class="j-form-label" for="user_password">비밀번호 <span class="j-form-span">*</span></label>
+<<<<<<< HEAD
     <input type="password" class="j-form-input" id="user_password" maxlength="16"  name="user_password" placeholder="대문자, 소문자, 숫자, 특수문자 포함(8자리 이상)." >
+=======
+    <input type="password" class="j-form-input" id="user_password" maxlength="16" minlength="8" name="user_password" required>
+>>>>>>> jjy
   </div>
   <div>
     <span id="pass_check_msg" data-check="0">&nbsp;</span>
   </div>
+<<<<<<< HEAD
   <div class="j-form-list">
     <ul class="j-form-ul">
       <li class="j-form-li">
@@ -1042,10 +1059,21 @@ include_once './right/user_btn.php'; // 우측메뉴
   <div class="j-form-f">
     <label class="j-form-label" for="user_name">이름 <span class="j-form-span">*</span></label>
     <input type="text" class="j-form-input" oninput="this.value = this.value.replace(/[^a-z|A-Z|ㄱ-ㅎ|가-힣]/g, '');" id="user_name" name="user_name" maxlength="16" >
+=======
+  <div class="j-form-f">
+    <label class="j-form-label" for="user_password2">비밀번호 확인 <span class="j-form-span">*</span></label>
+    <input type="password" class="j-form-input" id="user_password2" required>
+  </div>
+  &nbsp;
+  <div class="j-form-f">
+    <label class="j-form-label" for="user_name">이름 <span class="j-form-span">*</span></label>
+    <input type="text" class="j-form-input" id="user_name" name="user_name" required>
+>>>>>>> jjy
   </div>
   &nbsp;
   <div class="j-form-f">
     <label class="j-form-label" for="user_info">학번 <span class="j-form-span">*</span></label>
+<<<<<<< HEAD
     <input type="text" class="j-form-input" id="user_info" name="user_info" maxlength="6" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');" placeholder="숫자만 입력가능합니다(6자리)." >
   </div>
   <div>
@@ -1054,13 +1082,29 @@ include_once './right/user_btn.php'; // 우측메뉴
   <div class="j-form-f">
     <label class="j-form-label" for="user_email">이메일 <span class="j-form-span">*</span></label>
     <input type="email" class="j-form-input" id="user_email" name="user_email"  maxlength="16" placeholder="ex) abcd@domain.com"  >
+=======
+    <input type="text" class="j-form-input" id="user_info" name="user_info" required>
+  </div>
+  <div>
+    <span id="info_check_msg" data-check="0">  &nbsp;</span>
+</div>
+  <div class="j-form-f">
+    <label class="j-form-label" for="user_email">이메일 <span class="j-form-span">*</span></label>
+    <input type="email" class="j-form-input" id="user_email" name="user_email" placeholder="ex) abcd@domain.com"required >
+>>>>>>> jjy
   </div>
   &nbsp;
   <div class="j-form-f">
     <label class="j-form-label" for="user_phone">연락처 <span class="j-form-span">*</span></label>
+<<<<<<< HEAD
     <input type="text" class="j-form-input" id="user_phone" name="user_phone" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');" placeholder="숫자만 입력가능합니다(최대11자리)." maxlength="11" >
   </div>
     <span id="phone_check_msg" data-check="0">&nbsp;</span>
+=======
+    <input type="text" class="j-form-input" id="user_phone" name="user_phone" required>
+  </div>
+  &nbsp;
+>>>>>>> jjy
   <div class="j-form-b_group">
     <button class="j-form-btn j-form-btn01" type="reset">초기화</button>
     <button class="j-form-btn j-form-btn02" type="submit" id="save_frm">확인</button>
@@ -1068,6 +1112,9 @@ include_once './right/user_btn.php'; // 우측메뉴
 </div>
     </form>
     </main>
+<<<<<<< HEAD
   </div>
+=======
+>>>>>>> jjy
 </body>
 </html>
