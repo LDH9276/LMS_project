@@ -1,241 +1,136 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>명지대학교 lms</title>
+    <!-- 베이스css(리셋 포함) -->
+    <link rel="stylesheet" href="../css/base.css" type="text/css">
+    <!-- 헤더푸터 -->
+    <link rel="stylesheet" href="../css/common.css" type="text/css" />
+    <!-- 모듈 CSS -->
+    <link rel="stylesheet" href="./css/master_apply.css" type="text/css" />
+    <!-- 폰트어썸 -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css"
+    />
+    <!-- 제이쿼리 -->
+    <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
+    <script src="../script/common.js" defer></script>
+  </head>
+<body>
 <?php
-// 세션 감지 및 유저정보 호출
-if(isset($_SESSION['lms_logon'])){
-$mySession = $_SESSION['lms_logon'] ?? '';
-$userSQL = "SELECT * FROM user_table WHERE user_id = '$mySession'";
-$userQuery = mysqli_query($conn, $userSQL);
-$userRow = mysqli_fetch_array($userQuery);
-} else {
-  $userRow['user_type'] = 0;
-}
 
-// 관리자인지 아닌지 관리자면 userType 1, 아니면 0
-if($userRow['user_type'] == 3){
-  $userType = 1 ;
-} else {
-  $userType = 0 ;
-}
+include_once '../db/db_conn.php'; //DB연결
+include_once '../db/config.php'; //DB세션
+include_once '../header.php'; //메뉴
+include_once './right/master_btn.php'; //우측메뉴
 
+$id = $_SESSION['lms_logon'];
+
+$verify_sql = "SELECT user_type FROM user_table WHERE user_id = '$id'";
+$result = mysqli_query($conn, $verify_sql);
+$row = mysqli_fetch_array($result);
+$master = $row['user_type'];
+
+// 관리자가 아닐 경우
+if($master != 3){
+  echo('
+  <script>
+    alert("관리자만 접근할 수 있습니다.");
+    location.href = "./index.php";
+  </script>
+  ');
+} else
+
+$sql = "SELECT * FROM user_table WHERE user_type = 1 or user_type =2 or user_type = 0 order by user_type asc";
+$result = mysqli_query($conn, $sql);
 ?>
 
-    <header>
-      <!-- 상단헤더 -->
-      <h1>
-        <a href="http://leedh9276.dothome.co.kr/lms/index.php" title="메인페이지로">
-          <img src="http://leedh9276.dothome.co.kr/lms/img/logo.svg" alt="헤더 로고">
-        </a>
-      </h1>
-      <div id="h_wrap">
-        <a href="#;" title="알림"><i class="fa-solid fa-bell"></i></a>
-        <?php 
-        if(isset($_SESSION['lms_logon'])){
-          echo "<a href='#;' title='나의 일정'><i class='fa-solid fa-calendar'></i></a>";
-          echo "<a href='http://leedh9276.dothome.co.kr/lms/module/logout.php' title='로그아웃'><i class='fa-solid fa-sign-out'></i></a>";}
-        else{
-          echo "<a href='http://leedh9276.dothome.co.kr/lms/module/login.php' title='로그인'><i class='fa-solid fa-sign-in'></i></a>";
-        }
-        ?>
-      </div>
-      <div id="h_wrap-mobile">
-        <span></span>
-        <span></span>
-        <span></span>
-      </div>
-      <!-- 사이드 -->
-      <div id="h_side">
-        <div id="profile">
-          <?php
-            if(isset($_SESSION['lms_logon'])){ // 로그인이 되어있으면
-              echo "<img src='http://leedh9276.dothome.co.kr/lms/img/profile.png' alt='프로필이미지' />";
-            }
-            else{ // 비회원일 경우 출력
-              echo "";
-            }
-          ?>
-          <div>
-            <?php
-              if(isset($_SESSION['lms_logon'])){ // 로그인이 되어있으면
-                echo "<p>".$userRow['user_major']."</p>";
-                echo "<p>".$userRow['user_name']."</p>"; 
-              } else{ // 비회원일 경우 출력
-                echo "<p>비회원입니다 <br> 로그인 후 이용해주세요</p>";
-              }
-            ?>
-          </div>
-              <!-- 모바일 로그아웃 버튼 -->
-            <div class="h_side-logout">
-                <?php if(isset($_SESSION['lms_logon'])){ // 로그인이 되어있으면
-                echo "<a href='http://leedh9276.dothome.co.kr/lms/module/logout.php' title='로그아웃' class='h_side-logout-btn'>로그아웃</a>";
-                } else{ // 비회원일 경우 출력
-                echo "<a href='http://leedh9276.dothome.co.kr/lms/module/login.php' title='로그인' class='h_side-logout-btn'>로그인</a>";
-                }?>
-            </div>
+<div class="page-nav">
+  <h2>유저관리 페이지</h2>
 
-        </div>
-        <div id="search">
-          <form action="http://leedh9276.dothome.co.kr/lms/module/search.php" method="get">
-            <input type="search" name="search" aria-labelledby="search">
-            <button type="submit" aria-label="search"><i class="fa-solid fa-magnifying-glass"></i></button>
-          </form>
-        </div>
-        <nav>
-          
-        <?php
-          if($userType == 0){ // 비회원, 회원
-        ?>
+  <p class="page-nav__desc">
+    <i class="fas fa-home"></i>
+  </p>
+</div>
 
-          <ul id="gnb">
-            <li>
-              <div>
-                <span>마이페이지</span> <i class="fa-solid fa-chevron-down"></i>
-              </div>
-              <ul class="lnb">
-                <li><a href="#" title="증명서 발급">증명서 발급</a></li>
-                <li><a href="#" title="학교필수서식">학교필수서식</a></li>
-                <li><a href="#" title="성적확인">성적확인</a></li>
-                <li><a href="#" title="장학금 신청">장학금 신청</a></li>
-                <li><a href="#" title="자격증 안내">자격증 안내</a></li>
-              </ul>
-            </li>
-            <li>
-              <div>
-                <span>나의 강의</span> <i class="fa-solid fa-chevron-down"></i>
-              </div>
-              <ul class="lnb">
-                <li><a href="http://leedh9276.dothome.co.kr/lms/module/user_apply.php" title="수강신청">수강신청</a></li>
-                <li><a href="#" title="교육운영관리">교육운영관리</a></li>
-                <li><a href="#" title="성적관리">성적관리</a></li>
-                <li>
-                  <a href="#" title="졸업학력평가(4학년)"
-                    >졸업학력평가(4학년)</a
-                  >
-                </li>
-              </ul>
-            </li>
-            <li>
-              <div>
-                <span>학사일정</span> <i class="fa-solid fa-chevron-down"></i>
-              </div>
-              <ul class="lnb">
-                <li><a href="#" title="학사일정">학사일정</a></li>
-                <li><a href="#" title="공지사항">공지사항</a></li>
-                <li><a href="#" title="학교행사일정">학교행사일정</a></li>
-              </ul>
-            </li>
-            <li>
-              <div>
-                <span>학교행정</span> <i class="fa-solid fa-chevron-down"></i>
-              </div>
-              <ul class="lnb">
-                <li><a href="#" title="LMS 안내사항">LMS 안내사항</a></li>
-                <li><a href="#" title="공지사항">공지사항</a></li>
-                <li><a href="#" title="명지대 뉴스레터">명지대 뉴스레터</a></li>
-                <li><a href="#" title="행정부서">행정부서</a></li>
-                <li>
-                  <a href="#" title="대학생활 길라잡이">대학생활 길라잡이</a>
-                </li>
-                <li><a href="#" title="QnA">QnA</a></li>
-              </ul>
-            </li>
-          </ul>
-        <?php } else { // 관리자?> 
-          <ul id="gnb">
-            <li>
-              <div>
-                <span>계정관리</span> <i class="fa-solid fa-chevron-down"></i>
-              </div>
-              <ul class="lnb">
-                <li><a href="./master.php" title="학생관리">학생관리</a></li>
-                <li><a href="#" title="교직원관리">교직원관리</a></li>
-                <li><a href="#" title="자격증처리">자격증처리</a></li>
-              </ul>
-            </li>
-            <li>
-              <div>
-                <span>강의관리</span> <i class="fa-solid fa-chevron-down"></i>
-              </div>
-              <ul class="lnb">
-                <li><a href="./master_apply.php" title="수강신청관리">수강신청관리</a></li>
-                <li><a href="#" title="교육운영관리">교육운영관리</a></li>
-                <li><a href="#" title="성적관리">성적관리</a></li>
-                <li><a href="#" title="졸업관리">졸업관리</a></li>
-              </ul>
-            </li>
-            <li>
-              <div>
-                <span>학사관리</span> <i class="fa-solid fa-chevron-down"></i>
-              </div>
-              <ul class="lnb">
-                <li><a href="#" title="수업일정관리">수업일정관리</a></li>
-                <li><a href="#" title="학사일정관리">학사일정관리</a></li>
-                <li><a href="#" title="학교행사관리">학교행사관리</a></li>
-              </ul>
-            </li>
-            <li>
-              <div>
-                <span>행정관리</span> <i class="fa-solid fa-chevron-down"></i>
-              </div>
-              <ul class="lnb">
-                <li><a href="#" title="LMS 안내사항">LMS 안내사항</a></li>
-                <li><a href="http://leedh9276.dothome.co.kr/lms/module/notice_write.php" title="공지사항 작성">공지사항 작성</a></li>
-                <li><a href="#" title="명지대 뉴스레터">명지대 뉴스레터</a></li>
-                <li><a href="#" title="행정부서">행정부서</a></li>
-                <li>
-                  <a href="#" title="대학생활 길라잡이">대학생활 길라잡이</a>
-                </li>
-                <li><a href="#" title="QnA">QnA</a></li>
-              </ul>
-            </li>
-          </ul>
-        <?php }?>
-        </nav>
-        <div id="h_footer">
-          <ul>
-            <li>
-              <a href="http://leedh9276.dothome.co.kr/lms/module/notice_list.php"
-                ><span>공지사항</span><i class="fa-solid fa-chevron-right"></i
-              ></a>
-            </li>
-            <li>
-              <a href="#;"
-                ><span>LMS 이용 메뉴얼</span
-                ><i class="fa-solid fa-chevron-right"></i
-              ></a>
-            </li>
-          </ul>
-          <address>
-            Copyright(C) MYONGJI UNIVERSITY.<br>
-            All rights reserved.
-          </address>
-        </div>
-      </div>
+<div class="module">
 
-      <!-- 모바일 푸터 메뉴영역 -->
-      <div class="mobile-footer">
-          <div class="my-class">
-            <a href="#">
-              <img src="http://leedh9276.dothome.co.kr/lms/img/icon1.svg" alt="나의 강의">
-              <span>나의 강의</span>
-            </a>
-          </div>
-          <div class="my-info">
-            <a href="#">
-              <img src="http://leedh9276.dothome.co.kr/lms/img/icon2.svg" alt="나의 일정">
-              <span>나의 일정</span>
-            </a>
-          </div>
-          <div class="notice">
-            <a href="notice.php">
-              <img src="http://leedh9276.dothome.co.kr/lms/img/icon3.svg" alt="공지사항">
-              <span>공지사항</span>
-            </a>
-          </div>
-          <div class="alarm">
-            <a href="#">
-              <img src="http://leedh9276.dothome.co.kr/lms/img/icon4.svg" alt="알림">
-              <span>알림</span>
-            </a>
-          </div>
-      </div>
-    </header>
+<table class = "table">
+  <tr>
+    <th>아이디</th>
+    <th>이름</th>
+    <th>학번</th>
+    <th>전공</th>
+    <th>이메일</th>
+    <th>등급</th>
+    <th>승인</th>
+  </tr>
 
+  <?php
+  while($rows = mysqli_fetch_array($result)){
+    echo '<tr>';
+    echo '<td>'.$rows['user_id'].'</td>';
+    echo '<td>'.$rows['user_name'].'</td>';
+    echo '<td>'.$rows['user_info'].'</td>';
+    echo '<td>'.$rows['user_major'].'</td>';
+    echo '<td>'.$rows['user_email'].'</td>';
+    if($rows['user_type'] == 0){
+      echo '<td>가입대기</td>';
+    } else if($rows['user_type'] == 1){
+      echo '<td>학생</td>';
+    } else if($rows['user_type'] == 2){
+      echo '<td>교직원</td>';
+    }
+    if($rows['user_type'] == 0){ ?>
+      <td class="apply-tab">
+        <form action="./user_confirm.php" method="post" name="confirm" id="confirm">
+        <input type="hidden" name="user_id" value="<?=$rows['user_id']?>">
+        <input type="hidden" name="verify" value="ok">
+        <select name="major" id="major">
+          <option value="0">전공선택</option>
+          <option value="0">--학생--</option>
+          <option value="1">컴퓨터공학과</option>
+          <option value="2">전자공학과</option>
+          <option value="3">정보통신공학과</option>
+          <option value="4">소프트웨어학과</option>
+          <option value="0">--교직원--</option>
+          <option value="5">컴퓨터공학과</option>
+          <option value="6">전자공학과</option>
+          <option value="7">정보통신공학과</option>
+          <option value="8">소프트웨어학과</option>
+        </select>
+        <button type="submit" name="approve" id="btn-apply" class = "btn-sub btn-confirm">승인</button>
+        </form>
+        <form action="./user_confirm.php" method="post" name="reject" id="reject">
+        <input type="hidden" name="user_id" value="<?=$rows['user_id']?>">
+        <input type="hidden" name="verify" value="no">
+        <button type="submit" name="reject" id="btn-reject" class = "btn-sub btn-reject">거부</button>
+        </form>
+      </td>
+    <?php }else {
+  ?>
+      <td class="apply-tab">
+        <form action="./user_confirm.php" method="post" name="reject" id="reject">
+        <input type="hidden" name="user_id" value="<?=$rows['user_id']?>">
+        <input type="hidden" name="verify" value="no">
+        <p class = "brn-wrap">
+          <span class="btn btn-apply">승인됨</span>
+          <button type="submit" name="reject" id="btn-reject" class = "btn btn-reject">탈퇴</button>
+        </p>
+        </form>
+      </td>
+  <?php
+  }
+  echo '</tr>';
+  }
+
+  ?>
+
+</table>
+</div>
+</body>
+</html>
