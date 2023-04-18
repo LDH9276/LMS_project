@@ -14,7 +14,7 @@ $pw = mysqli_real_escape_string($conn, $pw);
 $email = $_POST['user-email'];
 $email = mysqli_real_escape_string($conn, $email);
 $phone = $_POST['user-phone'];
-$phone = mysqli_real_escape_string($conn, $email);
+$phone = mysqli_real_escape_string($conn, $phone);
 
 $pw = password_hash($pw, PASSWORD_DEFAULT);
 $stmt = mysqli_prepare($conn, "INSERT INTO user_table (user_id, user_name, user_password, user_info, user_email, user_phone) VALUES (?, ?, ?, ?, ?, ?)");

@@ -401,3 +401,81 @@
 }
 }
 
+
+/* 오른쪽 모듈 */
+.master-btn{
+  position: fixed;
+  top:0px;
+  right: 0px;
+  width: 500px;
+  background: #efefef;
+  z-index: 15;
+}
+.right-module1{
+  position: fixed;
+  top:80px;
+  right: 0px;
+  width: 500px;
+  background: #efefef;
+  z-index: 15;
+}
+.right-module2{
+  position: fixed;
+  top:calc(80px + 50vh);
+  right: 0px;
+  width: 500px;
+  background: #efefef;
+  z-index: 15;
+}
+.master-btn img{
+  width: 100%; height: 50vh;
+  object-fit: cover;
+}
+.bg-wrap{
+  display: flex;
+  position: relative;
+  width: 500px;
+  height: 50vh;
+  justify-content: center;
+  align-items: center;
+}
+.btn-bg{
+  width: 440px;
+  height: 350px;
+  background: #fff;
+  box-shadow : 0px 0px 20px rgba(0, 8, 82, 0.15);
+}
+.menu-wrap{
+  display: flex;
+  background: var(--m-color01);
+  color: var(--m-color02);
+  line-height: 60px;
+  justify-content: space-between;
+}
+.menu-title{
+  font-weight: 800;
+  font-size: 24px;
+  padding-left: 32px;
+}
+.btn-more{
+  width: 100px;
+  height: 60px;
+  background: var(--m-color04);
+}
+.btn-wrap{
+  display: grid;
+  position: absolute; top: 50%;
+  left: 50%; transform: translateX(-50%) translateY(-50%);
+  grid-template-columns: repeat(2, 180px);
+  gap:16px;
+}
+.btn-wrap li{
+  background: var(--m-color01);
+  line-height: 50px;
+}
+.btn-wrap li a{
+  display: block;
+  width: 100%; height: 100%;
+  color: var(--m-color02);
+  text-align: center;
+}
