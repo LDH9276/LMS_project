@@ -1,6 +1,6 @@
 @charset "utf-8";
-.module{
-  height: calc( 100vh - 50px );
+.module {
+  height: calc(100vh - 50px);
 }
 form {
   position: relative;
@@ -52,13 +52,13 @@ textarea:focus {
 }
 .j-form-f {
   margin: 0 auto;
-  width: 60%;
-  height: 40px;
+  width: 70%;
+  /* height: 40px; */
   display: flex;
   justify-content: space-between;
 }
 .j-form-input {
-  width: 353px;
+  width: 60%;
   border: none;
   background-color: var(--m-color03);
   padding: 10px;
@@ -68,7 +68,7 @@ textarea:focus {
 }
 .j-form-label {
   line-height: 40px;
-  font-size: 18px;
+  font-size: 1.125rem;
   font-weight: bold;
 }
 .j-form-b_group {
@@ -92,9 +92,6 @@ textarea:focus {
 .j-form-btn02 {
   background-color: var(--m-color01);
 }
-.j-form-agree {
-  height: 900px;
-}
 .j-form_a_a_p {
   line-height: 60px;
   border-top: 1px solid var(--m-color01);
@@ -104,11 +101,47 @@ textarea:focus {
 }
 #id_check_msg,
 #info_check_msg,
-#pass_check_msg{
+#pass_check_msg,
+#pass_check_msg2 {
   font-size: 12px;
 }
 .j-form-h2_span {
   position: absolute;
   right: 0;
   transform: translateY(40px);
+}
+.j-form-list {
+  width: 60%;
+  margin: 0 auto;
+  font-size: 12px;
+  justify-content: flex-end;
+  display: flex;
+}
+.j-form-ul {
+  width: 60%;
+}
+.j-form-li {
+  list-style: circle;
+  line-height: 24px;
+  text-align: initial;
+}
+@media screen and (min-width: 1230px) and (max-width: 1720px) {
+  .j-form-f {
+    width: 100%;
+  }
+  .j-form-label {
+    font-size: 1rem;
+  }
+  .j-form-t_area {
+    height: 313px;
+  }
+  textarea {
+    height: 200px;
+  }
+  .join_agree {
+    font-size: 14px;
+  }
+  .j-form-list {
+    width: 100%;
+  }
 }
