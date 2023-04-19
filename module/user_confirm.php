@@ -10,16 +10,38 @@ $major = (int)$major; // 전공밸류를 정수로 변환
 $verify = $_POST['verify']; // 승인버튼을 눌렀는지 거절버튼을 눌렀는지 확인
 
 if($verify == 'no'){ // 거절버튼을 눌렀을 경우 (삭제 우선적으로)
+
+  // 먼저 외래키 무시하는 옵션 설정
+  mysqli_query($conn, "SET FOREIGN_KEY_CHECKS=0");
+
+  // learn_apply에서 해당 아이디를 삭제
+  $sql_child = "DELETE FROM learn_apply WHERE user_id = '$ID'";
+  $result_child = mysqli_query($conn, $sql_child);
+
   // user_table에서 해당 아이디를 삭제
-  $sql = "DELETE FROM user_table WHERE user_id = '$ID'";
-  $result = mysqli_query($conn, $sql);
-  echo('
-  <script>
-    alert("거절되었습니다.");
-    location.href = "./master.php";
-  </script>
-  ');
-  exit;
+  $sql_parent = "DELETE FROM user_table WHERE user_id = '$ID'";
+  $result_parent = mysqli_query($conn, $sql_parent);
+
+  // 외래키 옵션 다시 설정
+  mysqli_query($conn, "SET FOREIGN_KEY_CHECKS=1");
+
+  if($result_parent){ // 삭제 성공시
+    echo('
+    <script>
+      alert("거절되었습니다.");
+      location.href = "./master.php";
+    </script>
+    ');
+    exit;
+  } else { // 삭제 실패시
+    echo('
+    <script>
+      alert("오류가 발생했습니다.");
+      location.href = "./master.php";
+    </script>
+    ');
+    exit;
+  }
 } else {
 
 // 학과를 선택하지 않았을 경우나 전공선택, 학생, 교직원 탭으로 선택할 경우
@@ -40,17 +62,17 @@ if($major < 5){
   $user_type = 2;
 }
 
-// 학과를 선택했을 경우
-if($major == 1 || 5){ 
+if($major == 1 || 5){
   $major = '컴퓨터공학과';
-} else if($major == 2 || 6){ 
+} 
+if($major == 2 || 6){
   $major = '전자공학과';
-} else if($major == 3 || 7){
+} 
+if($major == 3 || 7){
   $major = '정보통신공학과';
-} else if($major == 4 || 8){
+} 
+if($major == 4 || 8){
   $major = '소프트웨어학과';
-} else {
-  $major = '기타';
 }
 
 

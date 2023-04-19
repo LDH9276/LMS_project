@@ -17,7 +17,13 @@ if($id == 'mod') {
   $sql = "SELECT * FROM notice_list WHERE num = '$num'";
   $result = mysqli_query($conn, $sql);
   $data = mysqli_fetch_array($result);
-  }
+  } else {
+  $data = [
+    'notice_title' => '',
+    'notice_text' => '',
+    'notice_file' => ''
+  ];
+}
 ?>
 
     <form name='write' method="post" action="writePost.php" enctype="multipart/form-data">
@@ -46,7 +52,14 @@ if($id == 'mod') {
           <label for="notice_file">
             첨부파일
           </label>
-          <input type="file" name="notice_file" id="notice_file">
+
+          <?php if($data['notice_file']) {?>
+            <span><?=$data['notice_file']?></span>
+          <?php } else {?>
+            <span id="file_name"></span>
+          <?php }?>
+
+          <input type="file" name="notice_file" id="notice_file" onchange="displayFileName()">
           <label for="notice_file" class="btn-file">
             첨부파일
           </label>        
@@ -57,3 +70,16 @@ if($id == 'mod') {
         </p>
       </div>
     </form>
+
+    <script>
+      function displayFileName() {
+        // Get the file input element
+        var fileInput = document.getElementById("notice_file");
+
+        // Get the file name from the file input element
+        var fileName = fileInput.files[0].name;
+
+        // Display the file name in the file name element
+        document.getElementById("file_name").innerHTML = fileName;
+      }
+    </script>

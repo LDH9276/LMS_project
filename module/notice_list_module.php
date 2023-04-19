@@ -102,6 +102,3 @@
 
       </section>
     </main>
-
-  </body>
-</html>

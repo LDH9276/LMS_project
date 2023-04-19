@@ -62,7 +62,7 @@ mysqli_query ($conn, $view_sql);
       <?php if($userType == 1){?>
       <p class = "notice-mod-wrap"> 
         <a href="notice_write.php?id=<?=$id?>&modify=mod" title="수정하기" class="btn-sub btn-mod">수정하기</a>
-        <a href="notice_del_confirm.php?id=<?=$id?>" title="삭제하기" class="btn-sub btn-del">삭제하기</a>
+        <a href="confirmDel.php?id=<?=$id?>" title="삭제하기" class="btn-sub btn-del">삭제하기</a>
       </p>
         <a href="notice_list.php" class="btn btn-list" title="글목록보기">글목록보기</a>
       <?php } else {?>

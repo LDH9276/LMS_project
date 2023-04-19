@@ -341,6 +341,7 @@
 @media screen and (max-width:1024px) {
   html {
     overflow-x: hidden;
+    font-size: 14px;
   }
     header {
     position: fixed;

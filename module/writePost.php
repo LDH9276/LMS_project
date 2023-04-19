@@ -3,7 +3,7 @@ include '../db/db_conn.php';
 include '../db/config.php';
 
 $mod = $_POST['id'] ?? '';
-$num = $_POST['num'] ?? '';
+$num = (int)$_POST['num'] ?? 0;
 $prev_file = $_POST['prev_file'] ?? '';
 $notice_title=$_POST['notice_title'] ?? '';
 $notice_text=$_POST['notice_text'] ?? '';
@@ -42,33 +42,59 @@ if(isset($_FILES['notice_file'])) {
 }
 
 if($mod == 'mod'){ // 수정사항 확인 시
+
   if($files == null){
     $files = $prev_file;
   }
-  $stmt = mysqli_prepare($conn, "UPDATE notice_list SET notice_title = ?, notice_text = ?, notice_file = ?, notice_date = ? WHERE notice_num = ?");
+  $stmt = mysqli_prepare($conn, "UPDATE notice_list SET notice_title = ?, notice_text = ?, notice_file = ?, notice_date = ? WHERE num = ?");
+  if (!$stmt) {
+  // 오류 발생시 오류 출력
+  die(mysqli_error($conn));
+  }
   mysqli_stmt_bind_param($stmt, "ssssi", $notice_title, $notice_text, $files, $notice_date, $num);
   mysqli_stmt_execute($stmt);
+
+  if ($stmt->affected_rows == 1) {
+    echo('
+    <script>
+      alert("글이 수정되었습니다.");
+      location.href = "./notice_list.php";
+    </script>
+    ');
+  } else {
+    echo('
+    <script>
+      alert("글 수정에 실패하였습니다.");
+      location.href = "./notice_list.php";
+    </script>
+    ');
+  }
+
 } else { // 새로운 글 작성 시
+
   $stmt = mysqli_prepare($conn, "INSERT INTO notice_list (notice_title, notice_text, notice_file, notice_date) VALUES (?, ?, ?, ?)");
+  if (!$stmt) {
+    // 오류 발생시 오류 출력
+    die(mysqli_error($conn));
+  }
   mysqli_stmt_bind_param($stmt, "ssss", $notice_title, $notice_text, $files, $notice_date);
   mysqli_stmt_execute($stmt);
-}
-
-
-if ($stmt->affected_rows == 1) {
-  echo('
-  <script>
-    alert("글이 작성되었습니다.");
-    location.href = "./notice_list.php";
-  </script>
-  ');
-} else {
-  echo('
-  <script>
-    alert("글 작성에 실패하였습니다.");
-    location.href = "./notice_list.php";
-  </script>
-  ');
+  
+  if ($stmt->affected_rows == 1) {
+    echo('
+    <script>
+      alert("글이 작성되었습니다.");
+      location.href = "./notice_list.php";
+    </script>
+    ');
+  } else {
+    echo('
+    <script>
+      alert("글 작성에 실패하였습니다.");
+      location.href = "./notice_list.php";
+    </script>
+    ');
+  }  
 }
 mysqli_stmt_close($stmt);
 

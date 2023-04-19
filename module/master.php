@@ -3,19 +3,16 @@
   <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>명지대학교 lms</title>
     <!-- 베이스css(리셋 포함) -->
     <link rel="stylesheet" href="../css/base.css" type="text/css">
     <!-- 헤더푸터 -->
-    <link rel="stylesheet" href="../css/common.css" type="text/css" />
+    <link rel="stylesheet" href="../css/common.css" type="text/css">
     <!-- 모듈 CSS -->
-    <link rel="stylesheet" href="./css/master_apply.css" type="text/css" />
+    <link rel="stylesheet" href="./css/master_apply.css" type="text/css">
     <!-- 폰트어썸 -->
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css"
-    />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css">
     <!-- 제이쿼리 -->
     <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
     <script src="../script/common.js" defer></script>
@@ -105,21 +102,21 @@ $result = mysqli_query($conn, $sql);
         </select>
         <button type="submit" name="approve" id="btn-apply" class = "btn-sub btn-confirm">승인</button>
         </form>
-        <form action="./user_confirm.php" method="post" name="reject" id="reject">
+        <form action="./user_confirm.php" method="post" name="reject">
         <input type="hidden" name="user_id" value="<?=$rows['user_id']?>">
         <input type="hidden" name="verify" value="no">
-        <button type="submit" name="reject" id="btn-reject" class = "btn-sub btn-reject">거부</button>
+        <button type="submit" name="reject" class = "btn-sub btn-reject">거부</button>
         </form>
       </td>
     <?php }else {
   ?>
       <td class="apply-tab">
-        <form action="./user_confirm.php" method="post" name="reject" id="reject">
+        <form action="./user_confirm.php" method="post" name="reject">
         <input type="hidden" name="user_id" value="<?=$rows['user_id']?>">
         <input type="hidden" name="verify" value="no">
         <p class = "brn-wrap">
           <span class="btn btn-apply">승인됨</span>
-          <button type="submit" name="reject" id="btn-reject" class = "btn btn-reject">탈퇴</button>
+          <button type="submit" name="reject" class = "btn btn-reject">탈퇴</button>
         </p>
         </form>
       </td>
