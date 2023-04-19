@@ -11,9 +11,9 @@ $info = $_POST['user_info'];
 $info = mysqli_real_escape_string($conn, $info);
 $pw = $_POST['user_password'];
 $pw = mysqli_real_escape_string($conn, $pw);
-$email = $_POST['user-email'];
+$email = $_POST['user_email'];
 $email = mysqli_real_escape_string($conn, $email);
-$phone = $_POST['user-phone'];
+$phone = $_POST['user_phone'];
 $phone = mysqli_real_escape_string($conn, $phone);
 
 $pw = password_hash($pw, PASSWORD_DEFAULT);

@@ -1,5 +1,9 @@
 <!-- 관리자용 우측메뉴 -->
 
+<?php
+
+?>
+
 <div class="master-btn">
 
   <img src="http://leedh9276.dothome.co.kr/lms/module/right/img/master_menu.png" alt="마스터">
@@ -15,7 +19,7 @@
           <a href="./master_apply.php" title="수강신청확인">수강신청확인</a>
         </li>
         <li>
-          <a href="./learn_add.php" title="강의등록">강의등록</a>
+          <a href="./learn_add.php" title="강의등록"class="btn-act">강의등록</a>
         </li>
         <li>
           <a href="./master.php" title="유저관리">유저관리</a>

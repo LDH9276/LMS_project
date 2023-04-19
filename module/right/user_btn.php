@@ -8,7 +8,7 @@
     <div class="user-bg">
       <div class="menu-wrap">
       <span class="r-notice-title">공지사항</span>
-      <span class="r-notice-more"><a href="" title=""><span>더보기</span><i class="fa-solid fa-angle-right"></i></a></span>
+      <span class="r-notice-more"><a href="http://leedh9276@leedh9276.dothome.co.kr/lms/module/notice_list.php" title="공지사항 "><span>더보기</span><i class="fa-solid fa-angle-right"></i></a></span>
       </div>
       <ul class="notice-list">
           <?php

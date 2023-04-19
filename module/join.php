@@ -5,6 +5,8 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>명지대학교 lms</title>
+    <!-- 파비콘 -->
+    <link rel="icon" href="./img/pavicon.ico" type="image/x-icon" sizes="16x16">
     <!-- 베이스css(리셋 포함) -->
     <link rel="stylesheet" href="../css/base.css" type="text/css">
     <!-- 헤더푸터 -->
@@ -38,6 +40,12 @@ include_once './right/user_btn.php'; // 우측메뉴
 ?>
 
 <div class="module">
+      <!-- 메인 -->
+<main>
+<!-- 할일
+    2. 아이디 숫자, 영문 필수 넣기?
+    4. 비밀번호 특수문자 제한하기?
+-->
     
 <!-- 회원가입 -->
 <form name="회원가입" id="member_form" method="post" action="member_insert.php">
@@ -1025,7 +1033,7 @@ include_once './right/user_btn.php'; // 우측메뉴
       비밀번호는 8~16자의 영문 대/소문자, 숫자, 특수문자(!@#$%^&*) 를 혼합해서 사용하실 수 있습니다.
       </li>
       <li class="j-form-li">
-      아이디와 생일, 전화번호 등 개인정보와 관련된 숫자, 연속된 숫자, 반복된 문자 등 다른 사람이 쉽게 알아 낼 수 있는 비밀번호는 개인정보 유출의 위험이 높으므로 사용을 자제해 주시기 바랍니다.
+      아이디와 생일, 전화번호 등 개인정보와 관련된 숫자, 연속된 숫자, 반복된 문자 등 다른 사람이 쉽게 알아 낼 수 있는 비밀번호는 <br> 개인정보 유출의 위험이 높으므로 사용을 자제해 주시기 바랍니다.
       </li>
     </ul>
   </div>
@@ -1064,6 +1072,7 @@ include_once './right/user_btn.php'; // 우측메뉴
   </div>
 </div>
     </form>
+    </main>
   </div>
 </body>
 </html>

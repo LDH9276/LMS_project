@@ -62,16 +62,28 @@ if($major < 5){
   $user_type = 2;
 }
 
-if($major == 1 || 5){
+if($major == 1){
   $major = '컴퓨터공학과';
 } 
-if($major == 2 || 6){
+if($major == 2){
   $major = '전자공학과';
 } 
-if($major == 3 || 7){
+if($major == 3){
   $major = '정보통신공학과';
 } 
-if($major == 4 || 8){
+if($major == 4){
+  $major = '소프트웨어학과';
+}
+if($major == 5){
+  $major = '컴퓨터공학과';
+} 
+if($major == 6){
+  $major = '전자공학과';
+} 
+if($major == 7){
+  $major = '정보통신공학과';
+} 
+if($major == 8){
   $major = '소프트웨어학과';
 }
 

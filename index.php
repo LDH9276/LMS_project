@@ -2,20 +2,20 @@
 <html lang="ko">
   <head>
     <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>명지대학교 lms</title>
     <!-- 베이스css(리셋 포함) -->
     <link rel="stylesheet" href="./css/base.css" type="text/css">
     <!-- 헤더푸터 -->
-    <link rel="stylesheet" href="./css/common.css" type="text/css">
+    <link rel="stylesheet" href="./css/common.css" type="text/css" />
 
     <!-- 모듈 CSS -->
-    <link rel="stylesheet" href="./css/index.css" type="text/css">
+    <link rel="stylesheet" href="./css/index.css" type="text/css" />
 
     <!-- 우측메뉴css -->
-    <link rel="stylesheet" href="./module/right/css/notice.css" type="text/css">
-    <link rel="stylesheet" href="./module/right/css/todo.css" type="text/css">
+    <link rel="stylesheet" href="./module/right/css/notice.css" type="text/css" />
+    <link rel="stylesheet" href="./module/right/css/todo.css" type="text/css" />
 
     <!-- 폰트어썸 -->
     <link
@@ -32,6 +32,7 @@
 include_once './db/db_conn.php'; // DB 연결
 include_once './db/config.php'; // 세션
 include_once './header.php'; // 헤더
+include_once './module/right/notice.php'; //우측메뉴
 ?>
 
 <?php
@@ -122,8 +123,5 @@ $learn_list = explode(',', $userRow['learn_list']);
     ?>
     </div>
 </div>
-<?php
-include_once './module/right/notice.php'; //우측메뉴
-?>
 </body>
 </html>

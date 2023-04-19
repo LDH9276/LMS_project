@@ -80,6 +80,11 @@ select::-ms-expand {  /* IE10, IE11*/
   float: left;
   background: var(--m-color02);
 }
+.btn-confirm1{
+  border: 1px solid #002968;
+  color: var(--m-color01);
+  background: var(--m-color02);
+}
 .btn-apply{
   background: #002968;
   border: 1px solid #002968;

@@ -19,11 +19,12 @@ $result = mysqli_query($conn, $sql);
 <p>
   <span>강의 썸네일</span>
   <input type="file" name="learn_thumbnail" id="learn_thumbnail">
+  <label for="learn_thumbnail">파일 추가</label>
 </p>
 
 <p>
-  <label for="learn_title"></label>
-  <select name="teacher_name" id="learn_title">
+  <label for="teacher_name"></label>
+  <select name="teacher_name" id="teacher_name">
   <option value="">--- 담당교수 ---</option>
 
   <!-- 교수이름 출력 -->

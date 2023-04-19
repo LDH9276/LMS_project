@@ -5,6 +5,8 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>명지대학교 lms</title>
+    <!-- 파비콘 -->
+    <link rel="icon" href="./img/pavicon.ico" type="image/x-icon" sizes="16x16">
     <!-- 베이스css(리셋 포함) -->
     <link rel="stylesheet" href="../css/base.css" type="text/css">
     <!-- 헤더푸터 -->
@@ -23,7 +25,7 @@
 include_once '../db/db_conn.php'; //DB연결
 include_once '../db/config.php'; //DB세션
 include_once '../header.php'; //메뉴
-include_once './right/master_btn.php'; //우측메뉴
+include_once './right/master_btn-user.php'; //우측메뉴
 
 $id = $_SESSION['lms_logon'];
 
@@ -50,7 +52,7 @@ $result = mysqli_query($conn, $sql);
   <h2>유저관리 페이지</h2>
 
   <p class="page-nav__desc">
-    <i class="fas fa-home"></i>
+    <a href="http://leedh9276.dothome.co.kr/lms/module/master.php" title="메인페이지 이동"><i class="fas fa-home"></i></a>
   </p>
 </div>
 

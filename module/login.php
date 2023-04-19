@@ -13,6 +13,8 @@ include_once '../db/config.php'; // 세션 시작
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="#002968">
     <title>명지대학교 lms</title>
+    <!-- 파비콘 -->
+    <link rel="icon" href="./img/pavicon.ico" type="image/x-icon" sizes="16x16">
     <!-- 베이스css(리셋 포함) -->
     <link rel="stylesheet" href="../css/base.css" type="text/css">
     <!-- 헤더푸터 -->
@@ -53,7 +55,7 @@ include_once './right/user_btn.php'; //우측메뉴
             <input type="checkbox" id="cb1" class="login-form-checkbox">
             <label for="cb1"></label>
             <label for="cb1" class="login-form-save">아이디 저장</label>
-            <a href="#none" title="아이디 찾기">ID/PW 찾기</a>
+            <a href="#none" title="아이디 찾기" class="login-form-find">ID/PW 찾기</a>
           </li>
           <li class="login-form-li">
             <input type="submit" value="로그인" class="login-login-btn2">

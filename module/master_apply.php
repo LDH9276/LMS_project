@@ -5,6 +5,8 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>명지대학교 lms</title>
+    <!-- 파비콘 -->
+    <link rel="icon" href="./img/pavicon.ico" type="image/x-icon" sizes="16x16">
     <!-- 베이스css(리셋 포함) -->
     <link rel="stylesheet" href="../css/base.css" type="text/css">
     <!-- 헤더푸터 -->
@@ -28,7 +30,7 @@
 include_once '../db/db_conn.php';
 include_once '../db/config.php';
 include_once '../header.php';
-include_once './right/master_btn.php';
+include_once './right/master_btn-apply.php';
 
 $id = $_SESSION['lms_logon'];
 
@@ -55,7 +57,7 @@ $result = mysqli_query($conn, $sql);
   <h2>수강신청 관리페이지</h2>
 
   <p class="page-nav__desc">
-    <i class="fas fa-home"></i>
+    <a href="http://leedh9276.dothome.co.kr/lms/module/master.php" title="메인페이지(유저관리페이지) 이동"><i class="fas fa-home"></i></a> > <a href="http://leedh9276.dothome.co.kr/lms/module/master_apply.php" title="수강신청 관리 페이지">수강신청 관리</a>
   </p>
 </div>
 
@@ -81,7 +83,7 @@ $result = mysqli_query($conn, $sql);
           <form action="./master_apply_confirm.php" method="post">
           <input type="hidden" name="apply_ID" value="<?=$rows['apply_ID']?>">
           <input type="hidden" name="verify" value="ok">
-          <button type="submit" name="approve" class="btn btn-apply">승인</button>
+          <button type="submit" name="approve" class="btn btn-confirm1">승인</button>
           </form>
         </td>
       <?php }

@@ -336,6 +336,9 @@
   .mobile-footer{
     display: none;
   }
+  .btn-act{
+    background: var(--m-color04);
+  }
 }
 
 @media screen and (max-width:1024px) {
